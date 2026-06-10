@@ -1,0 +1,27 @@
+{
+  "name": "github-top-languages-lib",
+  "description": "Library for github-top-languages — chart generation, SVG output, and parameter parsing",
+  "author": "Mason L'Etoile",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masonlet/github-top-languages-lib"
+  },
+  "keywords": ["svg", "charts", "github-profile", "github-top-languages"],
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "~6.0.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "tsc -p tsconfig.build.json"
+  },
+  "files": ["dist", "src"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  }
+}
