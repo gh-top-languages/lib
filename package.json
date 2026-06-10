@@ -8,7 +8,7 @@
     "url": "https://github.com/masonlet/github-top-languages-lib"
   },
   "keywords": ["svg", "charts", "github-profile", "github-top-languages"],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "devDependencies": {
     "typescript": "~6.0.2",
@@ -24,9 +24,21 @@
   },
   "files": ["dist", "src"],
   "exports": {
-    "./*.js": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.js"
-    }
+    "./types.js":              { "types": "./dist/types.d.ts",              "import": "./dist/types.js"              },
+    "./charts/donut.js":       { "types": "./dist/charts/donut.d.ts",       "import": "./dist/charts/donut.js"       },
+    "./charts/pie.js":         { "types": "./dist/charts/pie.d.ts",         "import": "./dist/charts/pie.js"         },
+    "./charts/geometry.js":    { "types": "./dist/charts/geometry.d.ts",    "import": "./dist/charts/geometry.js"    },
+    "./charts/legend.js":      { "types": "./dist/charts/legend.d.ts",      "import": "./dist/charts/legend.js"      },
+    "./charts/layout.js":      { "types": "./dist/charts/layout.d.ts",      "import": "./dist/charts/layout.js"      },
+    "./render/chart.js":       { "types": "./dist/render/chart.d.ts",       "import": "./dist/render/chart.js"       },
+    "./render/svg.js":         { "types": "./dist/render/svg.d.ts",         "import": "./dist/render/svg.js"         },
+    "./render/error.js":       { "types": "./dist/render/error.d.ts",       "import": "./dist/render/error.js"       },
+    "./utils/params.js":       { "types": "./dist/utils/params.d.ts",       "import": "./dist/utils/params.js"       },
+    "./utils/sanitize.js":     { "types": "./dist/utils/sanitize.d.ts",     "import": "./dist/utils/sanitize.js"     },
+    "./constants/config.js":   { "types": "./dist/constants/config.d.ts",   "import": "./dist/constants/config.js"   },
+    "./constants/geometry.js": { "types": "./dist/constants/geometry.d.ts", "import": "./dist/constants/geometry.js" },
+    "./constants/styles.js":   { "types": "./dist/constants/styles.d.ts",   "import": "./dist/constants/styles.js"   },
+    "./constants/themes.js":   { "types": "./dist/constants/themes.d.ts",   "import": "./dist/constants/themes.js"   },
+    "./constants/types.js":    { "types": "./dist/constants/types.d.ts",    "import": "./dist/constants/types.js"    }
   }
 }
