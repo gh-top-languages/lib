@@ -49,8 +49,8 @@ describe("createLegend", () => {
       { lang: "C++", pct: 50 }
     ];
     const result = createLegend(langs, false, theme, 300, false);
-    expect(result.match(/<rect /g)!.length).toBe(2);
-    expect(result.match(/<text /g)!.length).toBe(2);
+    expect(result.match(/<rect/g)!.length).toBe(2);
+    expect(result.match(/<text/g)!.length).toBe(2);
     expect(result).toContain("C# 50.0%");
     expect(result).toContain("C++ 50.0%");
   });
