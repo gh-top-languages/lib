@@ -1,8 +1,8 @@
-import type { ChartType            } from "../types.js";
-import { sanitize                  } from "./sanitize.js";
-import { VALID_TYPES               } from "../constants/types.js";
-import { DEFAULT_CONFIG, MAX_COUNT } from "../constants/config.js";
-import { THEMES                    } from "../constants/themes.js";
+import type { ChartType } from "../types.js";
+import { sanitize       } from "./sanitize.js";
+import { VALID_TYPES    } from "../constants/types.js";
+import { DEFAULT_CONFIG } from "../constants/config.js";
+import { THEMES         } from "../constants/themes.js";
 
 export type QueryParams = Record<string, string | undefined>;
 
@@ -21,7 +21,7 @@ export function parseQueryParams(query: QueryParams) {
   const count     = parseIntSafe(query["count"], DEFAULT_CONFIG.COUNT);
 
   const customColours: string[] = [...baseTheme.colours];
-  for (let i = 1; i <= MAX_COUNT; i++) {
+  for (let i = 1; i <= DEFAULT_CONFIG.MAX_COUNT; i++) {
     const colourVal = query[`c${i}`];
     if(colourVal) customColours[i - 1] = normalizeHex(colourVal);
   }
@@ -32,9 +32,9 @@ export function parseQueryParams(query: QueryParams) {
   return {
     chartType,
     chartTitle:  query["hide_title"] === "true" ? '' : sanitize(query["title"] ?? DEFAULT_CONFIG.TITLE),
-    width:       Math.max(parseIntSafe(query["width"],  DEFAULT_CONFIG.WIDTH), DEFAULT_CONFIG.MIN_WIDTH),
-    height:      parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT),
-    count:       Math.min(Math.max(count, 1), MAX_COUNT),
+    width:       Math.max(parseIntSafe(query["width"],  DEFAULT_CONFIG.WIDTH),  DEFAULT_CONFIG.MIN_WIDTH ),
+    height:      Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
+    count:       Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
     selectedTheme: {
       bg:        THEMES[query["bg"] as keyof typeof THEMES]?.bg ?? (query["bg"] ? normalizeHex(query["bg"]) : baseTheme.bg),
       text:      query["text"] ? normalizeHex(query["text"]) : baseTheme.text,

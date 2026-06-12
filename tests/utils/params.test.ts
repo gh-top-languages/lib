@@ -1,7 +1,7 @@
-import { describe, it, expect      } from "vitest";
-import { DEFAULT_CONFIG, MAX_COUNT } from "../../src/constants/config.js";
-import { THEMES                    } from "../../src/constants/themes.js";
-import { parseQueryParams          } from "../../src/utils/params.js"
+import { describe, it, expect } from "vitest";
+import { DEFAULT_CONFIG       } from "../../src/constants/config.js";
+import { THEMES               } from "../../src/constants/themes.js";
+import { parseQueryParams     } from "../../src/utils/params.js"
 
 describe("parseQueryParams", () => {
   it("uses defaults when query is empty", () => {
@@ -43,7 +43,7 @@ describe("parseQueryParams", () => {
   it("clamps count between 1 and MAX_COUNT", () => {
     expect(parseQueryParams({ count: "0" }).count).toBe(1);
     expect(parseQueryParams({ count: "-5" }).count).toBe(1);
-    expect(parseQueryParams({ count: String(MAX_COUNT + 100) }).count).toBe(MAX_COUNT);
+    expect(parseQueryParams({ count: String(DEFAULT_CONFIG.MAX_COUNT + 100) }).count).toBe(DEFAULT_CONFIG.MAX_COUNT);
   });
 
   it("applies theme by name and allows overriding text/bg", () => {
