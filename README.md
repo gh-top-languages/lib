@@ -2,6 +2,9 @@
 
 Core library for github-top-languages projects — chart generation, SVG output, and parameter parsing
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
+[![lib](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
+
 ## Modules
 
 | Module                  | Description |
@@ -26,7 +29,7 @@ Core library for github-top-languages projects — chart generation, SVG output,
 ## Installation
 
 ```bash
-npm install github-top-languages-lib
+npm install @gh-top-languages/lib
 ```
 
 ## License
