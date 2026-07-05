@@ -4,21 +4,12 @@ import { generateChartData                            } from "../../src/render/c
 import { generateDonutChart                           } from "../../src/charts/donut.js";
 import { THEMES                                       } from "../../src/constants/themes.js";
 
-type MockChartResult = ChartResult & {
-  mockData: boolean;
-  data:     Language[];
-  theme:    Theme;
-  width:    number;
-}
+type MockChartResult = ChartResult & { mockData: boolean; data: Language[]; theme: Theme; };
 
 vi.mock("../../src/charts/donut.js", () => ({
-  generateDonutChart: vi.fn((data, theme, width, _stroke) => ({
-    segments: "",
-    legend:   "",
-    mockData: true,
-    data,
-    theme,
-    width
+  generateDonutChart: vi.fn((data, theme, _stroke) => ({
+    segments: "", legend: "", contentWidth: 0, contentHeight: 0,
+    mockData: true, data, theme
   } as MockChartResult))
 }));
 
@@ -26,24 +17,22 @@ describe("generateChartData", () => {
   const data      = [{ lang: "JavaScript", pct: 60 }];
   const theme     = THEMES.default;
   const chartType = "donut";
-  const width     = 400;
   const stroke    = false;
 
   it("should call donut generator when chartType is donut", () => {
-    const result = generateChartData(data, theme, chartType, width, stroke) as MockChartResult;
-    expect(generateDonutChart).toHaveBeenCalledWith(data, theme, width, stroke);
+    const result = generateChartData(data, theme, chartType, stroke) as MockChartResult;
+    expect(generateDonutChart).toHaveBeenCalledWith(data, theme, stroke);
     expect(result.data).toBe(data);
     expect(result.theme).toBe(theme);
-    expect(result.width).toBe(width);
   });
 
   it("defaults to donut generator when chartType is undefined", () => {
-    generateChartData(data, theme, undefined as unknown as ChartType, width, stroke);
-    expect(generateDonutChart).toHaveBeenCalledWith(data, theme, width, stroke);
+    generateChartData(data, theme, undefined as unknown as ChartType, stroke);
+    expect(generateDonutChart).toHaveBeenCalledWith(data, theme, stroke);
   });
 
   it("defaults to donut generator for unrecognized chartType", () => {
-    generateChartData(data, theme, "bigbadwolf" as ChartType, width, stroke);
-    expect(generateDonutChart).toHaveBeenCalledWith(data, theme, width, stroke);
+    generateChartData(data, theme, "bigbadwolf" as ChartType, stroke);
+    expect(generateDonutChart).toHaveBeenCalledWith(data, theme, stroke);
   });
 });

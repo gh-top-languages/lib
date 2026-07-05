@@ -17,8 +17,10 @@ export type Geometry = {
 export type ChartType = "donut" | "pie";
 
 export type ChartResult = {
-  segments: string;
-  legend:   string;
+  segments:      string;
+  legend:        string;
+  contentWidth:  number;
+  contentHeight: number;
 };
 
 export type Theme = {

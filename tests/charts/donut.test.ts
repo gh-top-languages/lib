@@ -19,11 +19,13 @@ const mockCreateLegend = vi.mocked(createLegend);
 describe("generateDonutChart", () => {
   const theme: Theme = { colours: ["#f00", "#0f0"], text: "#333", bg: "#fff" };
 
-  it("returns segments and legend", () => {
+  it("returns segments, legend, and content dimensions", () => {
     const langs  = [{ lang: "JS", pct: 100 }];
-    const result = generateDonutChart(langs, theme, 800, false);
+    const result = generateDonutChart(langs, theme, false);
     expect(result).toHaveProperty("segments");
     expect(result).toHaveProperty("legend");
+    expect(result).toHaveProperty("contentWidth");
+    expect(result).toHaveProperty("contentHeight");
     expect(mockCreateDonutSegments).toHaveBeenCalled();
     expect(mockCreateLegend).toHaveBeenCalled();
   });
@@ -32,7 +34,7 @@ describe("generateDonutChart", () => {
     const langs = Array.from({ length: LEGEND_SHIFT_THRESHOLD }, (_, i) => ({
       lang: `L${i}`, pct: 100 / LEGEND_SHIFT_THRESHOLD
     }));
-    generateDonutChart(langs, theme, 800, false);
+    generateDonutChart(langs, theme, false);
     const legendCall = mockCreateLegend.mock.calls.at(-1) ?? [];
     expect(legendCall[1]).toBe(false);
   });
@@ -41,24 +43,24 @@ describe("generateDonutChart", () => {
     const langs = Array.from({ length: LEGEND_SHIFT_THRESHOLD + 1 }, (_, i) => ({
       lang: `L${i}`, pct: 100 / (LEGEND_SHIFT_THRESHOLD + 1)
     }));
-
-    generateDonutChart(langs, theme, 800, false);
+    generateDonutChart(langs, theme, false);
     const legendCall = mockCreateLegend.mock.calls.at(-1) ?? [];
     expect(legendCall[1]).toBe(true);
   });
 
-  it("calculates positions based on width", () => {
+  it("computes chartX and legendStartX as numbers", () => {
     const langs = [{ lang: "Python", pct: 100 }];
-    generateDonutChart(langs, theme, 1000, false);
+    generateDonutChart(langs, theme, false);
     const segmentCall = mockCreateDonutSegments.mock.calls.at(-1);
     const legendCall = mockCreateLegend.mock.calls.at(-1) ?? [];
     expect(typeof segmentCall![1]).toBe("number");
-    expect(typeof legendCall![3]).toBe("number");
+    expect(typeof legendCall[3]).toBe("number");
+    expect(typeof legendCall[5]).toBe("number");
   });
 
   it("passes theme to both segments and legend", () => {
     const langs = [{ lang: "HTML", pct: 100 }];
-    generateDonutChart(langs, theme, 800, false);
+    generateDonutChart(langs, theme, false);
     const segmentsCall = mockCreateDonutSegments.mock.calls.at(-1)!;
     const legendCall = mockCreateLegend.mock.calls.at(-1) ?? [];
     expect(segmentsCall[3]).toEqual(theme.colours);

@@ -6,7 +6,8 @@ export function createLegend(
   isShifted:     boolean,
   selectedTheme: Theme,
   legendStartX:  number,
-  stroke:        boolean
+  stroke:        boolean,
+  columnWidth:   number
 ): string {
   const numLangs = languages.length;
 
@@ -21,7 +22,7 @@ export function createLegend(
       const col  = Math.floor(i / half);
       const row  = i % half;
 
-      x = legendStartX + col * LEGEND_STYLES.COLUMN_WIDTH;
+      x = legendStartX + col * columnWidth;
       y = LEGEND_STYLES.START_Y + row * LEGEND_STYLES.ROW_HEIGHT;
     }
 
@@ -40,7 +41,7 @@ export function createLegend(
         rx="${LEGEND_STYLES.SQUARE_RADIUS}"${strokeAttr}
       />
       <text
-        x="${x + LEGEND_STYLES.SQUARE_SIZE + 5}"
+        x="${x + LEGEND_STYLES.SQUARE_SIZE + LEGEND_STYLES.TEXT_GAP}"
         y="${y}"
         fill="${selectedTheme.text}"
         font-size="${LEGEND_STYLES.FONT_SIZE}"
