@@ -11,7 +11,7 @@ describe("createLegend", () => {
       { lang: "JavaScript", pct: 60 },
       { lang: "Python", pct: 40 }
     ];
-    const result = createLegend(langs, false, theme, 300, false);
+    const result = createLegend(langs, false, theme, 300, false, 110);
     expect(result).toContain(`x="300"`);
     expect(result).toContain(`y="${LEGEND_STYLES.START_Y}"`);
     expect(result).toContain(`y="${LEGEND_STYLES.START_Y + LEGEND_STYLES.ROW_HEIGHT}"`);
@@ -22,14 +22,14 @@ describe("createLegend", () => {
       lang: `Lang${i}`,
       pct: 12.5
     }));
-    const result = createLegend(langs, true, theme, 300, false);
-    expect(result).toContain(`x="300`);
-    expect(result).toContain(`x="${300 + LEGEND_STYLES.COLUMN_WIDTH}"`);
+    const result = createLegend(langs, true, theme, 300, false, 110);
+    expect(result).toContain(`x="300"`);
+    expect(result).toContain(`x="${300 + 110}"`);
   });
 
   it("formats percentages to one decimal", () => {
     const langs = [{ lang: "Rust", pct: 33.333 }];
-    const result = createLegend(langs, false, theme, 300, false);
+    const result = createLegend(langs, false, theme, 300, false, 110);
 
     expect(result).toContain("33.3%");
     expect(result).not.toContain("33.333");
@@ -37,7 +37,7 @@ describe("createLegend", () => {
 
   it("adds stroke attributes when stroke is enabled", () => {
     const langs = [{ lang: "C#", pct: 100 }];
-    const result = createLegend(langs, false, theme, 300, true);
+    const result = createLegend(langs, false, theme, 300, true, 110);
 
     expect(result).toContain(`stroke="#000"`);
     expect(result).toContain(`stroke-width="0.5"`);
@@ -48,7 +48,7 @@ describe("createLegend", () => {
       { lang: "C#", pct: 50 },
       { lang: "C++", pct: 50 }
     ];
-    const result = createLegend(langs, false, theme, 300, false);
+    const result = createLegend(langs, false, theme, 300, false, 110);
     expect(result.match(/<rect/g)!.length).toBe(2);
     expect(result.match(/<text/g)!.length).toBe(2);
     expect(result).toContain("C# 50.0%");
@@ -57,7 +57,7 @@ describe("createLegend", () => {
 
   it("applies theme colours correctly", () => {
     const langs = [{ lang: "Java", pct: 100 }];
-    const result = createLegend(langs, false, theme, 300, false);
+    const result = createLegend(langs, false, theme, 300, false, 110);
     expect(result).toContain(`fill="#f00"`);
     expect(result).toContain(`fill="${theme.text}"`);
   });

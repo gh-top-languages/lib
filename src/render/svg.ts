@@ -1,17 +1,13 @@
 import { TITLE_STYLES } from "../constants/styles.js"
+import type { ChartResult } from "../types.js";
 
 export function renderSvg(
-  width:      number,
-  height:     number,
-  background: string,
-  segments:   string,
-  legend:     string,
-  title:      string | null,
-  textColour: string
+  width: number, height: number, background: string,
+  chart: ChartResult, title: string | null, textColour: string
 ): string {
   const titleElement = title ? `
     <text
-      x="${width/2}"
+      x="${chart.contentWidth / 2}"
       y="${TITLE_STYLES.TEXT_Y}"
       text-anchor="middle" fill="${textColour}"
       font-family="Arial" font-size="${TITLE_STYLES.FONT_SIZE}"
@@ -23,9 +19,12 @@ export function renderSvg(
   return `
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
       <rect width="${width}" height="${height}" fill="${background}" rx="10"/>
-      ${titleElement}
-      ${segments}
-      ${legend}
-    </svg>
-  `.trim();
+      <svg width="${width}" height="${height}"
+           viewBox="0 0 ${chart.contentWidth} ${chart.contentHeight}"
+           preserveAspectRatio="xMidYMid meet">
+        ${titleElement}
+        ${chart.segments}
+        ${chart.legend}
+      </svg>
+    </svg>`.trim();
 }

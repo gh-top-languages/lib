@@ -18,18 +18,20 @@ const mockCreateLegend = vi.mocked(createLegend);
 describe("generatePieChart", () => {
   const theme = { colours: ["#f00", "#0f0"], text: "#333", bg: "#fff" };
 
-  it("returns segments and legend", () => {
+  it("returns segments, legend, and content dimensions", () => {
     const langs = [{ lang: "JS", pct: 100 }];
-    const result = generatePieChart(langs, theme, 800, false);
+    const result = generatePieChart(langs, theme, false);
     expect(result).toHaveProperty("segments");
     expect(result).toHaveProperty("legend");
+    expect(result).toHaveProperty("contentWidth");
+    expect(result).toHaveProperty("contentHeight");
     expect(mockCreateDonutSegments).toHaveBeenCalled();
     expect(mockCreateLegend).toHaveBeenCalled();
   });
 
   it("passes INNER_RADIUS: 0 for filled pie", () => {
     const langs = [{ lang: "Python", pct: 100 }];
-    generatePieChart(langs, theme, 800, false);
+    generatePieChart(langs, theme, false);
     const call = mockCreateDonutSegments.mock.calls.at(-1)!;
     const geometry = call[2];
     expect(geometry.INNER_RADIUS).toBe(0);
@@ -39,14 +41,14 @@ describe("generatePieChart", () => {
     const langs = Array.from({ length: LEGEND_SHIFT_THRESHOLD + 1 }, (_, i) => ({
       lang: `L${i}`, pct: 100 / (LEGEND_SHIFT_THRESHOLD + 1)
     }));
-    generatePieChart(langs, theme, 800, false);
+    generatePieChart(langs, theme, false);
     const legendCall = mockCreateLegend.mock.calls.at(-1)!;
     expect(legendCall[1]).toBe(true);
   });
 
-  it("calculates positions based on width", () => {
+  it("computes chartX and legendStartX as numbers", () => {
     const langs = [{ lang: "Rust", pct: 100 }];
-    generatePieChart(langs, theme, 1000, false);
+    generatePieChart(langs, theme, false);
     const segmentCall = mockCreateDonutSegments.mock.calls.at(-1)!;
     const legendCall = mockCreateLegend.mock.calls.at(-1)!;
     expect(typeof segmentCall[1]).toBe("number");

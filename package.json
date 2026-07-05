@@ -17,7 +17,7 @@
   "scripts": {
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "build": "tsc -p tsconfig.build.json",
     "prepare": "tsc -p tsconfig.build.json"
   },
