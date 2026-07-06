@@ -51,7 +51,12 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
   const colours: string[] = [...baseTheme.colours];
   for (let i = 1; i <= DEFAULT_CONFIG.MAX_COUNT; i++) {
     const colourVal = query[`c${i}`];
-    if (colourVal) colours[i - 1] = parseHex(colourVal, colours[i - 1] ?? baseTheme.text);
+    if (colourVal) {
+      const themeMatch = THEMES[colourVal as keyof typeof THEMES];
+      colours[i - 1] = themeMatch
+        ? themeMatch.colours[i - 1] ?? baseTheme.text
+        : parseHex(colourVal, colours[i - 1] ?? baseTheme.text);
+    }
   }
 
   const typeParam = query["type"] as ChartType | undefined;
