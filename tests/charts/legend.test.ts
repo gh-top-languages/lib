@@ -61,4 +61,25 @@ describe("createLegend", () => {
     expect(result).toContain(`fill="#f00"`);
     expect(result).toContain(`fill="${theme.text}"`);
   });
+
+  it("gapType 'gap': shows raw percentages even when total < 100", () => {
+    const langs = [{ lang: "JS", pct: 30 }, { lang: "TS", pct: 30 }];
+    const result = createLegend(langs, false, theme, 300, false, 110, "gap");
+    expect(result).toContain("JS 30.0%");
+    expect(result).toContain("TS 30.0%");
+  });
+
+  it("gapType 'grow': renormalizes percentages to sum to 100", () => {
+    const langs = [{ lang: "JS", pct: 30 }, { lang: "TS", pct: 30 }];
+    const result = createLegend(langs, false, theme, 300, false, 110, "grow");
+    expect(result).toContain("JS 50.0%");
+    expect(result).toContain("TS 50.0%");
+  });
+
+  it("gapType 'adapt': also renormalizes percentages to sum to 100", () => {
+    const langs = [{ lang: "JS", pct: 10 }, { lang: "TS", pct: 30 }];
+    const result = createLegend(langs, false, theme, 300, false, 110, "adapt");
+    expect(result).toContain("JS 25.0%");
+    expect(result).toContain("TS 75.0%");
+  });
 });

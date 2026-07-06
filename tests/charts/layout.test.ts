@@ -63,4 +63,17 @@ describe("computeLayout", () => {
     );
     expect(many.contentHeight).toBeGreaterThan(few.contentHeight);
   });
+
+  it("gapType 'grow': measures width using the renormalized percentage, not raw", () => {
+    const langs = [{ lang: "Go", pct: 30 }, { lang: "JavaScript", pct: 30 }];
+    const { legendWidth } = measureLegend(langs, false, "grow");
+    const expected = entryWidth("JavaScript 50.0%");
+    expect(legendWidth).toBeCloseTo(expected);
+  });
+
+  it("measureText: falls back to DEFAULT_CHAR_WIDTH for unmapped characters", () => {
+    const langs = [{ lang: "日本語", pct: 100 }];
+    const { legendWidth } = measureLegend(langs, false, "gap");
+    expect(legendWidth).toBeGreaterThan(0);
+  });
 });
