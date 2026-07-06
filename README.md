@@ -6,8 +6,7 @@ Core library for github-top-languages projects — chart generation, SVG output,
 [![lib](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
 
 ## Modules
-
-| Module                  | Description                               |
+| Path                    | Description                               |
 | ---                     | ---                                       |
 | `constants/config.js`   | Default configuration values              |
 | `constants/geometry.js` | Geometry constants                        |
@@ -27,7 +26,6 @@ Core library for github-top-languages projects — chart generation, SVG output,
 | `render/error.js`       | Error SVG rendering                       |
 
 ## Installation
-
 ```bash
 npm install @gh-top-languages/lib
 ```
