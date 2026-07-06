@@ -2,7 +2,7 @@
   "name": "@gh-top-languages/lib",
   "description": "Library for github-top-languages — chart generation, SVG output, and parameter parsing",
   "author": "Mason L'Etoile",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
