@@ -1,4 +1,4 @@
-import type { ChartType } from "../types.js";
+import type { ChartType, ParsedParams } from "../types.js";
 import { sanitize       } from "./sanitize.js";
 import { VALID_TYPES    } from "../constants/types.js";
 import { DEFAULT_CONFIG } from "../constants/config.js";
@@ -16,7 +16,7 @@ const parseIntSafe = (
 
 const normalizeHex = (val: string) => `#${val.replace(/^#/, '')}`;
 
-export function parseQueryParams(query: QueryParams) {
+export function parseQueryParams(query: QueryParams): ParsedParams {
   const baseTheme = THEMES[query["theme"] as keyof typeof THEMES] ?? THEMES.default;
   const count     = parseIntSafe(query["count"], DEFAULT_CONFIG.COUNT);
 

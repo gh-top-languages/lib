@@ -28,3 +28,15 @@ export type Theme = {
   readonly text:    string;
   readonly bg:      string;
 };
+
+export interface ParsedParams {
+  chartType:     ChartType;
+  chartTitle:    string;
+  width:         number;
+  height:        number;
+  count:         number;
+  selectedTheme: Theme;
+  stroke:        boolean;
+  useTestData:   boolean;
+  errorTest:     string;
+}
