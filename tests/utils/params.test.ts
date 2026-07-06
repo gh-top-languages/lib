@@ -66,6 +66,12 @@ describe("parseQueryParams", () => {
     expect(params.selectedTheme.bg).toBe(THEMES[bgThemeKey as keyof typeof THEMES]!.bg);
   });
 
+  it("if text matches a theme name, use that theme's text", () => {
+    const key = Object.keys(THEMES)[0]!;
+    const params = parseQueryParams({ text: key });
+    expect(params.selectedTheme.text).toBe(THEMES[key as keyof typeof THEMES]!.text);
+  });
+
   it("overrides colours via c1..cMAX_COUNT", () => {
     const params = parseQueryParams({
       c1: "#abc123",
@@ -94,5 +100,17 @@ describe("parseQueryParams", () => {
   it("enables test mode when test=true", () => {
     expect(parseQueryParams({ test: "true" }).useTestData).toBe(true);
     expect(parseQueryParams({ test: "false" }).useTestData).toBe(false);
+  });
+
+  it("falls back to theme colour when c1..cN is invalid hex", () => {
+    const params = parseQueryParams({ c1: "not-a-colour", c2: "javascript:alert(1)" });
+    expect(params.selectedTheme.colours[0]).toBe(THEMES.default.colours[0]);
+    expect(params.selectedTheme.colours[1]).toBe(THEMES.default.colours[1]);
+  });
+
+  it("falls back to theme bg/text when invalid hex given", () => {
+    const params = parseQueryParams({ bg: "<script>", text: "\"onmouseover" });
+    expect(params.selectedTheme.bg).toBe(THEMES.default.bg);
+    expect(params.selectedTheme.text).toBe(THEMES.default.text);
   });
 });

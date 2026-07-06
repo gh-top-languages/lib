@@ -1,5 +1,5 @@
 import { describe, it, expect                                   } from "vitest";
-import type { Language                                          } from "../../src/types.js";
+import type { Language                                          } from "../../src/charts/types.js";
 import { polarToCartesian, describeSegment, createDonutSegments } from "../../src/charts/geometry.js";
 
 const mockGeometry = { CENTER_Y: 100, INNER_RADIUS: 30, OUTER_RADIUS: 50 };
@@ -31,7 +31,9 @@ describe("donut geometry", () => {
       100,
       mockGeometry,
       ["#f00"],
-      true
+      true,
+      "gap",
+      "#000"
     );
     expect(paths).toMatch(/stroke="#000"/);
   });
@@ -43,7 +45,9 @@ describe("donut geometry", () => {
       100,
       mockGeometry,
       ["#f00"],
-      false
+      false,
+      "gap",
+      "#000"
     );
     expect(paths).toMatch(/fill="#f00"/);
   });
@@ -59,8 +63,40 @@ describe("donut geometry", () => {
       100,
       mockGeometry,
       ["#f00", "#0f0", "#00f"],
-      false
+      false,
+      "gap",
+      "#000"
     );
     expect(paths.split("/>").length - 1).toBe(3);
+  });
+
+  it("gapType 'gap': appends a gap-fill segment when totalPct < 100", () => {
+    const langs: Language[] = [{ lang: "JS", pct: 50 }];
+    const paths = createDonutSegments(langs, 100, mockGeometry, ["#f00"], false, "gap", "#333");
+    expect(paths.split("/>").length - 1).toBe(2);
+    expect(paths).toMatch(/fill="#333"/);
+  });
+
+  it("gapType 'grow': rescales arcs to fill the circle, no gap segment", () => {
+    const langs: Language[] = [{ lang: "JS", pct: 50 }];
+    const paths = createDonutSegments(langs, 100, mockGeometry, ["#f00"], false, "grow", "#333");
+    expect(paths.split("/>").length - 1).toBe(1);
+    expect(paths).not.toMatch(/fill="#333"/);
+  });
+
+  it("gapType 'adapt': rescales arcs to fill the circle, no gap segment", () => {
+    const langs: Language[] = [
+      { lang: "JS", pct: 30 },
+      { lang: "TS", pct: 20 }
+    ];
+    const paths = createDonutSegments(langs, 100, mockGeometry, ["#f00", "#0f0"], false, "adapt", "#333");
+    expect(paths.split("/>").length - 1).toBe(2);
+    expect(paths).not.toMatch(/fill="#333"/);
+  });
+
+  it("totalPct === 100: no gap segment regardless of gapType", () => {
+    const langs: Language[] = [{ lang: "JS", pct: 100 }];
+    const paths = createDonutSegments(langs, 100, mockGeometry, ["#f00"], false, "gap", "#333");
+    expect(paths.split("/>").length - 1).toBe(1);
   });
 });

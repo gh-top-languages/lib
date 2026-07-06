@@ -1,5 +1,5 @@
-import { TITLE_STYLES } from "../constants/styles.js"
-import type { ChartResult } from "../types.js";
+import { TITLE_STYLES     } from "../constants/styles.js";
+import type { ChartResult } from "../charts/types.js";
 
 export function renderSvg(
   width: number, height: number, background: string,

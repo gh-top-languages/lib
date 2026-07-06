@@ -1,5 +1,5 @@
-import type { Point, Language, Geometry } from "../types.js"
-import { FULL_CIRCLE_ANGLE              } from "../constants/geometry.js";
+import { FULL_CIRCLE_ANGLE                       } from "../constants/geometry.js";
+import type { Point, Language, Geometry, GapType } from "./types.js"
 
 export const polarToCartesian = (
   cx:       number,
@@ -61,12 +61,16 @@ export const createDonutSegments = (
   cx:        number,
   geometry:  Geometry,
   colours:   string[],
-  stroke:    boolean
+  stroke:    boolean,
+  gapType:   GapType,
+  gapColour: string,
 ): string => {
   let currentAngle = -0.1;
+  const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
+  const scale = gapType !== "gap" && totalPct > 0 ? 100 / totalPct : 1;
 
-  return languages.map((lang, i) => {
-    let angle = (lang.pct / 100) * 360;
+  let segments = languages.map((lang, i) => {
+    let angle = ((lang.pct * scale) / 100) * 360;
 
     const segmentAngle =  Math.min(currentAngle + angle + 0.1, FULL_CIRCLE_ANGLE);
     const path = describeSegment(
@@ -85,4 +89,11 @@ export const createDonutSegments = (
       : ` stroke="${fillColour}" stroke-width="0.2"`;
     return `<path d="${path}" fill="${fillColour}"${strokeAttr} shape-rendering="geometricPrecision"/>`;
   }).join('');
+
+  if (gapType === "gap" && totalPct > 0 && totalPct < 100) {
+    const gapPath = describeSegment(cx, geometry.CENTER_Y, geometry.INNER_RADIUS, geometry.OUTER_RADIUS, currentAngle, FULL_CIRCLE_ANGLE - 0.1);
+    segments += `<path d="${gapPath}" fill="${gapColour}" shape-rendering="geometricPrecision"/>`;
+  }
+
+  return segments;
 }

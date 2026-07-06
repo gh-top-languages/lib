@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
+import type { ChartResult     } from "../../src/charts/types.js";
 import { renderSvg            } from "../../src/render/svg.js";
-import type { ChartResult     } from "../../src/types.js";
 
 describe("renderSvg", () => {
   const chart: ChartResult = {

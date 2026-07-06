@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import type { Theme           } from "../../src/types.js";
-import { renderError          } from "../../src/render/error.js";
 import { THEMES               } from "../../src/constants/themes.js";
+import type { Theme           } from "../../src/charts/types.js";
+import { renderError          } from "../../src/render/error.js";
 
 describe("renderError", () => {
   it("renders error SVG with message", () => {
