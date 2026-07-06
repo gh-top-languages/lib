@@ -14,7 +14,21 @@ const parseIntSafe = (
   return Number.isNaN(parsed) ? fallback : parsed;
 }
 
-const normalizeHex = (val: string) => `#${val.replace(/^#/, '')}`;
+const parseHex = (val: string | undefined, fallback: string): string => {
+  if (!val) return fallback;
+  const hex = `#${val.replace(/^#/, '')}`;
+  return /^#[0-9a-f]{3,8}$/i.test(hex) ? hex : fallback;
+};
+
+const resolveColour = (
+  val:      string | undefined,
+  themeKey: "bg" | "text",
+  fallback: string
+): string => {
+  if (!val) return fallback;
+  const themeMatch = THEMES[val as keyof typeof THEMES];
+  return themeMatch ? themeMatch[themeKey] : parseHex(val, fallback);
+};
 
 export function parseQueryParams(query: QueryParams): ParsedParams {
   const baseTheme = THEMES[query["theme"] as keyof typeof THEMES] ?? THEMES.default;
@@ -23,7 +37,7 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
   const customColours: string[] = [...baseTheme.colours];
   for (let i = 1; i <= DEFAULT_CONFIG.MAX_COUNT; i++) {
     const colourVal = query[`c${i}`];
-    if(colourVal) customColours[i - 1] = normalizeHex(colourVal);
+    if (colourVal) customColours[i - 1] = parseHex(colourVal, customColours[i - 1] ?? baseTheme.text);
   }
 
   const typeParam = query["type"] as ChartType | undefined;
@@ -36,9 +50,9 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
     height:      Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
     count:       Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
     selectedTheme: {
-      bg:        THEMES[query["bg"] as keyof typeof THEMES]?.bg ?? (query["bg"] ? normalizeHex(query["bg"]) : baseTheme.bg),
-      text:      query["text"] ? normalizeHex(query["text"]) : baseTheme.text,
-      colours:   customColours
+      bg:      resolveColour(query["bg"], "bg", baseTheme.bg),
+      text:    resolveColour(query["text"], "text", baseTheme.text),
+      colours: customColours
     },
     stroke:      query["stroke"] === "true",
     useTestData: query["test"] === "true",
