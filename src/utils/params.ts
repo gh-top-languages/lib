@@ -1,8 +1,20 @@
-import type { ChartType, ParsedParams } from "../types.js";
+import type { ChartType, Theme } from "../types.js";
 import { sanitize       } from "./sanitize.js";
 import { VALID_TYPES    } from "../constants/types.js";
 import { DEFAULT_CONFIG } from "../constants/config.js";
 import { THEMES         } from "../constants/themes.js";
+
+export interface ParsedParams {
+  chartType:     ChartType;
+  chartTitle:    string;
+  width:         number;
+  height:        number;
+  count:         number;
+  selectedTheme: Theme;
+  stroke:        boolean;
+  useTestData:   boolean;
+  errorTest:     string;
+}
 
 export type QueryParams = Record<string, string | undefined>;
 
