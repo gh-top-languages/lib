@@ -1,5 +1,4 @@
 import { describe, it, expect, vi } from "vitest";
-import { LEGEND_SHIFT_THRESHOLD   } from "../../src/constants/styles.js";
 import { createDonutSegments      } from "../../src/charts/geometry.js";
 import { generatePieChart         } from "../../src/charts/pie.js";
 import { createLegend             } from "../../src/charts/legend.js";
@@ -37,21 +36,12 @@ describe("generatePieChart", () => {
     expect(geometry.INNER_RADIUS).toBe(0);
   });
 
-  it("shifts legend when above threshold", () => {
-    const langs = Array.from({ length: LEGEND_SHIFT_THRESHOLD + 1 }, (_, i) => ({
-      lang: `L${i}`, pct: 100 / (LEGEND_SHIFT_THRESHOLD + 1)
-    }));
-    generatePieChart(langs, theme, "gap", false);
-    const legendCall = mockCreateLegend.mock.calls.at(-1)!;
-    expect(legendCall[1]).toBe(true);
-  });
-
   it("computes chartX and legendStartX as numbers", () => {
     const langs = [{ lang: "Rust", pct: 100 }];
     generatePieChart(langs, theme, "gap", false);
     const segmentCall = mockCreateDonutSegments.mock.calls.at(-1)!;
     const legendCall = mockCreateLegend.mock.calls.at(-1)!;
     expect(typeof segmentCall[1]).toBe("number");
-    expect(typeof legendCall[3]).toBe("number");
+    expect(typeof legendCall[2]).toBe("number");
   });
 });

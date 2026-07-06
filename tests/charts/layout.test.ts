@@ -39,7 +39,7 @@ describe("measureLegend", () => {
 describe("computeLayout", () => {
   it("chartX and legendStartX derive from CONTENT_PAD and radius, not the requested width", () => {
     const langs = [{ lang: "Rust", pct: 100 }];
-    const { chartX, legendStartX } = computeLayout(langs, false, DONUT_GEOMETRY, "gap");
+    const { chartX, legendStartX } = computeLayout(langs, DONUT_GEOMETRY, "gap");
     expect(chartX).toBe(CONTENT_PAD + DONUT_GEOMETRY.OUTER_RADIUS);
     expect(legendStartX).toBe(chartX + DONUT_GEOMETRY.OUTER_RADIUS + CHART_MARGIN_RIGHT);
   });
@@ -47,18 +47,17 @@ describe("computeLayout", () => {
   it("contentWidth hugs the legend's right edge plus CONTENT_PAD", () => {
     const langs = [{ lang: "Rust", pct: 100 }];
     const { legendStartX, legendWidth } = {
-      ...computeLayout(langs, false, DONUT_GEOMETRY, "gap"),
+      ...computeLayout(langs, DONUT_GEOMETRY, "gap"),
       ...measureLegend(langs, false, "gap")
     };
-    const layout = computeLayout(langs, false, DONUT_GEOMETRY, "gap");
+    const layout = computeLayout(langs, DONUT_GEOMETRY, "gap");
     expect(layout.contentWidth).toBeCloseTo(legendStartX + legendWidth + CONTENT_PAD);
   });
 
   it("contentHeight grows with extra legend rows once the legend outgrows the donut", () => {
-    const few  = computeLayout([{ lang: "A", pct: 100 }], false, DONUT_GEOMETRY, "gap");
+    const few  = computeLayout([{ lang: "A", pct: 100 }], DONUT_GEOMETRY, "gap");
     const many = computeLayout(
-      Array.from({ length: 10 }, (_, i) => ({ lang: `L${i}`, pct: 10 })),
-      false,
+      Array.from({ length: 16 }, (_, i) => ({ lang: `L${i}`, pct: 10 })),
       DONUT_GEOMETRY, "gap"
     );
     expect(many.contentHeight).toBeGreaterThan(few.contentHeight);

@@ -1,9 +1,8 @@
-import { LEGEND_STYLES                 } from "../constants/styles.js";
-import type { Theme, Language, GapType } from "./types.js";
+import { LEGEND_SHIFT_THRESHOLD, LEGEND_STYLES } from "../constants/styles.js";
+import type { Theme, Language, GapType         } from "./types.js";
 
 export function createLegend(
   languages:     Language[],
-  isShifted:     boolean,
   selectedTheme: Theme,
   legendStartX:  number,
   stroke:        boolean,
@@ -17,7 +16,7 @@ export function createLegend(
   return languages.map((lang, i) => {
     let x: number, y: number;
 
-    if (!isShifted) {
+    if (languages.length <= LEGEND_SHIFT_THRESHOLD) {
       x = legendStartX;
       y = LEGEND_STYLES.START_Y + i * LEGEND_STYLES.ROW_HEIGHT;
     } else {
