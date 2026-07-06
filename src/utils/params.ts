@@ -34,10 +34,10 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
   const baseTheme = THEMES[query["theme"] as keyof typeof THEMES] ?? THEMES.default;
   const count     = parseIntSafe(query["count"], DEFAULT_CONFIG.COUNT);
 
-  const customColours: string[] = [...baseTheme.colours];
+  const colours: string[] = [...baseTheme.colours];
   for (let i = 1; i <= DEFAULT_CONFIG.MAX_COUNT; i++) {
     const colourVal = query[`c${i}`];
-    if (colourVal) customColours[i - 1] = parseHex(colourVal, customColours[i - 1] ?? baseTheme.text);
+    if (colourVal) colours[i - 1] = parseHex(colourVal, colours[i - 1] ?? baseTheme.text);
   }
 
   const typeParam = query["type"] as ChartType | undefined;
@@ -52,7 +52,7 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
     selectedTheme: {
       bg:      resolveColour(query["bg"], "bg", baseTheme.bg),
       text:    resolveColour(query["text"], "text", baseTheme.text),
-      colours: customColours
+      colours,
     },
     stroke:      query["stroke"] === "true",
     useTestData: query["test"] === "true",
