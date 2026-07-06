@@ -33,13 +33,14 @@ const parseHex = (val: string | undefined, fallback: string): string => {
 };
 
 const resolveColour = (
-  val:      string | undefined,
-  themeKey: "bg" | "text",
-  fallback: string
+  query:    QueryParams,
+  theme:    Theme,
+  themeKey: "bg" | "text"
 ): string => {
-  if (!val) return fallback;
+  const val = query[themeKey];
+  if (!val) return theme[themeKey];
   const themeMatch = THEMES[val as keyof typeof THEMES];
-  return themeMatch ? themeMatch[themeKey] : parseHex(val, fallback);
+  return themeMatch ? themeMatch[themeKey] : parseHex(val, theme[themeKey]);
 };
 
 export function parseQueryParams(query: QueryParams): ParsedParams {
@@ -62,8 +63,8 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
     height:      Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
     count:       Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
     selectedTheme: {
-      bg:      resolveColour(query["bg"], "bg", baseTheme.bg),
-      text:    resolveColour(query["text"], "text", baseTheme.text),
+      bg:      resolveColour(query, baseTheme, "bg"),
+      text:    resolveColour(query, baseTheme, "text"),
       colours,
     },
     stroke:      query["stroke"] === "true",
