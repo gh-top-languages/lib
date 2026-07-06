@@ -1,5 +1,5 @@
-import { LEGEND_STYLES        } from "../constants/styles.js";
-import type { Theme, Language } from "./types.js";
+import { LEGEND_STYLES                 } from "../constants/styles.js";
+import type { Theme, Language, GapType } from "./types.js";
 
 export function createLegend(
   languages:     Language[],
@@ -7,9 +7,12 @@ export function createLegend(
   selectedTheme: Theme,
   legendStartX:  number,
   stroke:        boolean,
-  columnWidth:   number
+  columnWidth:   number,
+  gapType:       GapType,
 ): string {
   const numLangs = languages.length;
+  const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
+  const displayPct = (pct: number) => gapType === "gap" || totalPct === 0 ? pct : pct * (100 / totalPct);
 
   return languages.map((lang, i) => {
     let x: number, y: number;
@@ -47,7 +50,7 @@ export function createLegend(
         font-size="${LEGEND_STYLES.FONT_SIZE}"
         font-family="Arial"
       >
-      ${lang.lang} ${lang.pct.toFixed(1)}%
+      ${lang.lang} ${displayPct(lang.pct).toFixed(1)}%
     </text>
     `;
   }).join('');

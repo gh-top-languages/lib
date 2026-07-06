@@ -5,7 +5,7 @@ import {
   ARIAL_CHAR_WIDTHS,
   DEFAULT_CHAR_WIDTH
 } from "../constants/styles.js";
-import type { Geometry, Language } from "./types.js";
+import type { GapType, Geometry, Language } from "./types.js";
 
 export function resolveLayout(count: number, stroke: boolean) {
   return {
@@ -20,8 +20,10 @@ const measureText = (text: string, fontSize: number): number => [...text]
 const estimateEntryWidth = (label: string): number =>
   LEGEND_STYLES.SQUARE_SIZE + LEGEND_STYLES.TEXT_GAP + measureText(label, LEGEND_STYLES.FONT_SIZE);
 
-export function measureLegend(languages: Language[], isShifted: boolean) {
-  const entryWidth = (lang: Language) => estimateEntryWidth(`${lang.lang} ${lang.pct.toFixed(1)}%`);
+export function measureLegend(languages: Language[], isShifted: boolean, gapType: GapType) {
+  const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
+  const displayPct = (pct: number) => gapType === "gap" || totalPct === 0 ? pct : pct * (100 / totalPct);
+  const entryWidth = (lang: Language) => estimateEntryWidth(`${lang.lang} ${displayPct(lang.pct).toFixed(1)}%`);
 
   if (!isShifted) {
     const width = languages.reduce((max, l) => Math.max(max, entryWidth(l)), 0);
@@ -40,8 +42,8 @@ export function measureLegend(languages: Language[], isShifted: boolean) {
 
 export const CONTENT_PAD = 20;
 
-export function computeLayout(languages: Language[], isShifted: boolean, geometry: Geometry) {
-  const { columnWidth, legendWidth } = measureLegend(languages, isShifted);
+export function computeLayout(languages: Language[], isShifted: boolean, geometry: Geometry, gapType: GapType) {
+  const { columnWidth, legendWidth } = measureLegend(languages, isShifted, gapType);
 
   const chartX       = CONTENT_PAD + geometry.OUTER_RADIUS;
   const legendStartX = chartX + geometry.OUTER_RADIUS + CHART_MARGIN_RIGHT;

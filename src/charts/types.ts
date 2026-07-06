@@ -26,5 +26,8 @@ export type ChartResult = {
 export type Theme = {
   readonly text: string;
   readonly bg:   string;
+  readonly gap:  string;
   readonly colours: readonly string[];
 };
+
+export type GapType = "gap" | "grow" | "adapt";

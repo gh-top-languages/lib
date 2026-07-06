@@ -2,6 +2,7 @@ export const THEMES = {
   default: {
     bg:   "#0d1117",
     text: "#ffffff",
+    gap:   "#212121",
     colours: [
       "#A8D5Ba",
       "#FFD6A5",
@@ -24,6 +25,7 @@ export const THEMES = {
   light: {
     bg:   "#ffffff",
     text: "#2f2f2f",
+    gap:  "#e9e7e7",
     colours: [
       "#2ecc71",
       "#3498db",
@@ -46,6 +48,7 @@ export const THEMES = {
   dark: {
     bg:   "#1a1a1a",
     text: "#ccd6f6",
+    gap:  "#2f2f2f",
     colours: [
       "#ff6b6b",
       "#4ecdc3",

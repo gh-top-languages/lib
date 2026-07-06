@@ -1,13 +1,14 @@
-import { PIE_GEOMETRY                      } from "../constants/geometry.js";
-import type { ChartResult, Language, Theme } from "./types.js";
-import { resolveLayout, computeLayout      } from "./layout.js";
-import { createDonutSegments               } from "./geometry.js";
-import { createLegend                      } from "./legend.js";
+import { PIE_GEOMETRY                               } from "../constants/geometry.js";
+import type { ChartResult, GapType, Language, Theme } from "./types.js";
+import { resolveLayout, computeLayout } from "./layout.js";
+import { createDonutSegments          } from "./geometry.js";
+import { createLegend                 } from "./legend.js";
 
 export function generatePieChart(
   normalizedLanguages: Language[],
   selectedTheme:       Theme,
-  stroke:              boolean
+  gapType:             GapType,
+  stroke:              boolean,
 ): ChartResult {
   const { isShifted, useStroke } = resolveLayout(normalizedLanguages.length, stroke);
   const {
@@ -16,14 +17,16 @@ export function generatePieChart(
    columnWidth,
    contentWidth,
    contentHeight
-  } = computeLayout(normalizedLanguages, isShifted, PIE_GEOMETRY);
+  } = computeLayout(normalizedLanguages, isShifted, PIE_GEOMETRY, gapType);
 
   const segments = createDonutSegments(
     normalizedLanguages,
     chartX,
     PIE_GEOMETRY,
     [...selectedTheme.colours],
-    useStroke
+    useStroke,
+    gapType,
+    selectedTheme.gap
   );
   const legend = createLegend(
     normalizedLanguages,
@@ -31,7 +34,8 @@ export function generatePieChart(
     selectedTheme,
     legendStartX,
     useStroke,
-    columnWidth
+    columnWidth,
+    gapType
   );
 
   return { segments, legend, contentWidth, contentHeight };

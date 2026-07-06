@@ -1,8 +1,8 @@
-import { VALID_TYPES           } from "../constants/types.js";
-import { DEFAULT_CONFIG        } from "../constants/config.js";
-import { THEMES                } from "../constants/themes.js";
-import type { ChartType, Theme } from "../charts/types.js";
-import { sanitize              } from "./sanitize.js";
+import { VALID_TYPES                    } from "../constants/types.js";
+import { DEFAULT_CONFIG                 } from "../constants/config.js";
+import { THEMES                         } from "../constants/themes.js";
+import type { ChartType, GapType, Theme } from "../charts/types.js";
+import { sanitize                       } from "./sanitize.js";
 
 export interface ParsedParams {
   chartType:     ChartType;
@@ -11,6 +11,7 @@ export interface ParsedParams {
   height:        number;
   count:         number;
   selectedTheme: Theme;
+  gapType:       GapType;
   stroke:        boolean;
   useTestData:   boolean;
   errorTest:     string;
@@ -33,14 +34,14 @@ const parseHex = (val: string | undefined, fallback: string): string => {
 };
 
 const resolveColour = (
-  query:    QueryParams,
-  theme:    Theme,
-  themeKey: "bg" | "text"
+  query: QueryParams,
+  theme: Theme,
+  key:   "bg" | "text" | "gap"
 ): string => {
-  const val = query[themeKey];
-  if (!val) return theme[themeKey];
+  const val = query[key];
+  if (!val) return theme[key];
   const themeMatch = THEMES[val as keyof typeof THEMES];
-  return themeMatch ? themeMatch[themeKey] : parseHex(val, theme[themeKey]);
+  return themeMatch ? themeMatch[key] : parseHex(val, theme[key]);
 };
 
 export function parseQueryParams(query: QueryParams): ParsedParams {
@@ -65,8 +66,10 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
     selectedTheme: {
       bg:      resolveColour(query, baseTheme, "bg"),
       text:    resolveColour(query, baseTheme, "text"),
+      gap:     resolveColour(query, baseTheme, "gap"),
       colours,
     },
+    gapType:     (["gap", "grow", "adapt"] as const).includes(query["gap_type"] as GapType) ? query["gap_type"] as GapType : "gap",
     stroke:      query["stroke"] === "true",
     useTestData: query["test"] === "true",
     errorTest:   sanitize(query["error"] ?? '')

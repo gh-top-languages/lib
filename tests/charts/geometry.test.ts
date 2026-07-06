@@ -31,7 +31,9 @@ describe("donut geometry", () => {
       100,
       mockGeometry,
       ["#f00"],
-      true
+      true,
+      "gap",
+      "#000"
     );
     expect(paths).toMatch(/stroke="#000"/);
   });
@@ -43,7 +45,9 @@ describe("donut geometry", () => {
       100,
       mockGeometry,
       ["#f00"],
-      false
+      false,
+      "gap",
+      "#000"
     );
     expect(paths).toMatch(/fill="#f00"/);
   });
@@ -59,7 +63,9 @@ describe("donut geometry", () => {
       100,
       mockGeometry,
       ["#f00", "#0f0", "#00f"],
-      false
+      false,
+      "gap",
+      "#000"
     );
     expect(paths.split("/>").length - 1).toBe(3);
   });
