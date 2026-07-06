@@ -1,8 +1,8 @@
-import type { ChartType, Theme } from "../types.js";
-import { sanitize       } from "./sanitize.js";
-import { VALID_TYPES    } from "../constants/types.js";
-import { DEFAULT_CONFIG } from "../constants/config.js";
-import { THEMES         } from "../constants/themes.js";
+import { VALID_TYPES           } from "../constants/types.js";
+import { DEFAULT_CONFIG        } from "../constants/config.js";
+import { THEMES                } from "../constants/themes.js";
+import type { ChartType, Theme } from "../charts/types.js";
+import { sanitize              } from "./sanitize.js";
 
 export interface ParsedParams {
   chartType:     ChartType;

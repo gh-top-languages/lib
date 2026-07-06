@@ -3,15 +3,15 @@ export type Point = {
   y: number;
 };
 
-export type Language = {
-  lang: string;
-  pct:  number;
-};
-
 export type Geometry = {
   CENTER_Y:     number;
   INNER_RADIUS: number;
   OUTER_RADIUS: number;
+};
+
+export type Language = {
+  lang: string;
+  pct:  number;
 };
 
 export type ChartType = "donut" | "pie";

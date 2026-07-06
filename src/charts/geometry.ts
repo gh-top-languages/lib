@@ -1,5 +1,5 @@
-import type { Point, Language, Geometry } from "../types.js"
 import { FULL_CIRCLE_ANGLE              } from "../constants/geometry.js";
+import type { Point, Language, Geometry } from "./types.js"
 
 export const polarToCartesian = (
   cx:       number,

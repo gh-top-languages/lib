@@ -1,11 +1,8 @@
-import type { Language, Theme, ChartResult } from "../types.js";
 import { PIE_GEOMETRY                      } from "../constants/geometry.js";
+import type { ChartResult, Language, Theme } from "./types.js";
+import { resolveLayout, computeLayout      } from "./layout.js";
 import { createDonutSegments               } from "./geometry.js";
 import { createLegend                      } from "./legend.js";
-import {
-  resolveLayout,
-  computeLayout
-} from "./layout.js";
 
 export function generatePieChart(
   normalizedLanguages: Language[],

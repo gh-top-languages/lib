@@ -1,8 +1,8 @@
 import { describe, it, expect, vi                     } from "vitest";
-import type { ChartType, ChartResult, Language, Theme } from "../../src/types.js";
-import { generateChartData                            } from "../../src/render/chart.js";
-import { generateDonutChart                           } from "../../src/charts/donut.js";
 import { THEMES                                       } from "../../src/constants/themes.js";
+import type { ChartType, ChartResult, Language, Theme } from "../../src/charts/types.js";
+import { generateChartData                            } from "../../src/charts/generate.js";
+import { generateDonutChart                           } from "../../src/charts/donut.js";
 
 type MockChartResult = ChartResult & { mockData: boolean; data: Language[]; theme: Theme; };
 

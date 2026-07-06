@@ -1,7 +1,12 @@
 import { describe, it, expect } from "vitest";
+import {
+  LEGEND_STYLES,
+  CHART_MARGIN_RIGHT,
+  ARIAL_CHAR_WIDTHS,
+  DEFAULT_CHAR_WIDTH
+} from "../../src/constants/styles.js";
+import { DONUT_GEOMETRY                            } from "../../src/constants/geometry.js";
 import { measureLegend, computeLayout, CONTENT_PAD } from "../../src/charts/layout.js";
-import { LEGEND_STYLES, CHART_MARGIN_RIGHT, ARIAL_CHAR_WIDTHS, DEFAULT_CHAR_WIDTH } from "../../src/constants/styles.js";
-import { DONUT_GEOMETRY } from "../../src/constants/geometry.js";
 
 const measureText = (text: string) => [...text]
   .reduce((sum, ch) => sum + (ARIAL_CHAR_WIDTHS[ch] ?? DEFAULT_CHAR_WIDTH), 0) * LEGEND_STYLES.FONT_SIZE / 1000;

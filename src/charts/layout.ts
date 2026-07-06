@@ -1,5 +1,11 @@
-import { LEGEND_SHIFT_THRESHOLD, LEGEND_STYLES, CHART_MARGIN_RIGHT, ARIAL_CHAR_WIDTHS, DEFAULT_CHAR_WIDTH } from "../constants/styles.js";
-import type { Geometry, Language } from "../types.js";
+import {
+  LEGEND_SHIFT_THRESHOLD,
+  LEGEND_STYLES,
+  CHART_MARGIN_RIGHT,
+  ARIAL_CHAR_WIDTHS,
+  DEFAULT_CHAR_WIDTH
+} from "../constants/styles.js";
+import type { Geometry, Language } from "./types.js";
 
 export function resolveLayout(count: number, stroke: boolean) {
   return {

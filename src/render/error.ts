@@ -1,6 +1,6 @@
-import type { Theme   } from "../types.js";
 import { THEMES       } from "../constants/themes.js";
-import { ERROR_STYLES } from "../constants/styles.js"
+import { ERROR_STYLES } from "../constants/styles.js";
+import type { Theme   } from "../charts/types.js";
 import { sanitize     } from "../utils/sanitize.js";
 
 export function renderError(

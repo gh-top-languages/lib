@@ -1,5 +1,5 @@
 import { describe, it, expect                                   } from "vitest";
-import type { Language                                          } from "../../src/types.js";
+import type { Language                                          } from "../../src/charts/types.js";
 import { polarToCartesian, describeSegment, createDonutSegments } from "../../src/charts/geometry.js";
 
 const mockGeometry = { CENTER_Y: 100, INNER_RADIUS: 30, OUTER_RADIUS: 50 };

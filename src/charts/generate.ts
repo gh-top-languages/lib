@@ -1,6 +1,6 @@
-import type { Language, Theme, ChartType, ChartResult } from "../types.js";
-import { generateDonutChart                           } from "../charts/donut.js";
-import { generatePieChart                             } from "../charts/pie.js";
+import type { ChartResult, Language, Theme, ChartType } from "./types.js";
+import { generateDonutChart                           } from "./donut.js";
+import { generatePieChart                             } from "./pie.js";
 
 const CHART_GENERATORS: Record<ChartType, (
   data:   Language[],

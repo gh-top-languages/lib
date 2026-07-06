@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
-import type { Theme               } from "../../src/types.js";
 import { LEGEND_SHIFT_THRESHOLD   } from "../../src/constants/styles.js";
+import type { Theme               } from "../../src/charts/types.js";
 import { generateDonutChart       } from "../../src/charts/donut.js";
 import { createDonutSegments      } from "../../src/charts/geometry.js";
 import { createLegend             } from "../../src/charts/legend.js";
