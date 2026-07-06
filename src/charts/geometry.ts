@@ -67,7 +67,7 @@ export const createDonutSegments = (
 ): string => {
   let currentAngle = -0.1;
   const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
-  const scale = gapType === "adapt" && totalPct > 0 ? 100 / totalPct : 1;
+  const scale = gapType !== "gap" && totalPct > 0 ? 100 / totalPct : 1;
 
   let segments = languages.map((lang, i) => {
     let angle = ((lang.pct * scale) / 100) * 360;
@@ -90,7 +90,7 @@ export const createDonutSegments = (
     return `<path d="${path}" fill="${fillColour}"${strokeAttr} shape-rendering="geometricPrecision"/>`;
   }).join('');
 
-  if (gapType !== "adapt" && totalPct > 0 && totalPct < 100) {
+  if (gapType === "gap" && totalPct > 0 && totalPct < 100) {
     const gapPath = describeSegment(cx, geometry.CENTER_Y, geometry.INNER_RADIUS, geometry.OUTER_RADIUS, currentAngle, FULL_CIRCLE_ANGLE - 0.1);
     segments += `<path d="${gapPath}" fill="${gapColour}" shape-rendering="geometricPrecision"/>`;
   }

@@ -69,11 +69,11 @@ describe("createLegend", () => {
     expect(result).toContain("TS 30.0%");
   });
 
-  it("gapType 'grow': renormalizes percentages to sum to 100", () => {
+  it("gapType 'grow': shows raw percentages (only adapt renormalizes)", () => {
     const langs = [{ lang: "JS", pct: 30 }, { lang: "TS", pct: 30 }];
     const result = createLegend(langs, theme, 300, false, 110, "grow");
-    expect(result).toContain("JS 50.0%");
-    expect(result).toContain("TS 50.0%");
+    expect(result).toContain("JS 30.0%");
+    expect(result).toContain("TS 30.0%");
   });
 
   it("gapType 'adapt': also renormalizes percentages to sum to 100", () => {

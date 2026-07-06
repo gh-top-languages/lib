@@ -63,10 +63,10 @@ describe("computeLayout", () => {
     expect(many.contentHeight).toBeGreaterThan(few.contentHeight);
   });
 
-  it("gapType 'grow': measures width using the renormalized percentage, not raw", () => {
+  it("gapType 'grow': measures width using the raw percentage, not renormalized", () => {
     const langs = [{ lang: "Go", pct: 30 }, { lang: "JavaScript", pct: 30 }];
     const { legendWidth } = measureLegend(langs, false, "grow");
-    const expected = entryWidth("JavaScript 50.0%");
+    const expected = entryWidth("JavaScript 30.0%");
     expect(legendWidth).toBeCloseTo(expected);
   });
 

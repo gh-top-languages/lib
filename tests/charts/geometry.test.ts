@@ -77,11 +77,11 @@ describe("donut geometry", () => {
     expect(paths).toMatch(/fill="#333"/);
   });
 
-  it("gapType 'grow': still gap-fills the ring (grow only affects labels)", () => {
+  it("gapType 'grow': rescales arcs to fill the circle, no gap segment", () => {
     const langs: Language[] = [{ lang: "JS", pct: 50 }];
     const paths = createDonutSegments(langs, 100, mockGeometry, ["#f00"], false, "grow", "#333");
-    expect(paths.split("/>").length - 1).toBe(2);
-    expect(paths).toMatch(/fill="#333"/);
+    expect(paths.split("/>").length - 1).toBe(1);
+    expect(paths).not.toMatch(/fill="#333"/);
   });
 
   it("gapType 'adapt': rescales arcs to fill the circle, no gap segment", () => {

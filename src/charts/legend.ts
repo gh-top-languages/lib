@@ -11,7 +11,7 @@ export function createLegend(
 ): string {
   const numLangs = languages.length;
   const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
-  const displayPct = (pct: number) => gapType === "gap" || totalPct === 0 ? pct : pct * (100 / totalPct);
+  const displayPct = (pct: number) => gapType === "adapt" && totalPct > 0 ? pct * (100 / totalPct) : pct;
 
   return languages.map((lang, i) => {
     let x: number, y: number;

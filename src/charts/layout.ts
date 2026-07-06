@@ -15,7 +15,7 @@ const estimateEntryWidth = (label: string): number =>
 
 export function measureLegend(languages: Language[], isShifted: boolean, gapType: GapType) {
   const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
-  const displayPct = (pct: number) => gapType === "gap" || totalPct === 0 ? pct : pct * (100 / totalPct);
+  const displayPct = (pct: number) => gapType === "adapt" && totalPct > 0 ? pct * (100 / totalPct) : pct;
   const entryWidth = (lang: Language) => estimateEntryWidth(`${lang.lang} ${displayPct(lang.pct).toFixed(1)}%`);
 
   if (!isShifted) {
