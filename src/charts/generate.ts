@@ -1,24 +1,45 @@
-import type { ChartResult, Language, Theme, ChartType, GapType } from "./types.js";
-import { generateDonutChart } from "./donut.js";
-import { generatePieChart   } from "./pie.js";
+import { DONUT_GEOMETRY, PIE_GEOMETRY } from "../constants/geometry.js";
+import type { ChartResult, Language, Theme, ChartType, GapType, Geometry } from "./types.js";
+import { computeLayout                } from "./layout.js";
+import { createDonutSegments          } from "./geometry.js";
+import { createLegend                 } from "./legend.js";
 
-const CHART_GENERATORS: Record<ChartType, (
-  data:    Language[],
-  theme:   Theme,
-  gapType: GapType,
-  stroke:  boolean
-) => ChartResult> = {
-  donut: generateDonutChart,
-  pie:   generatePieChart,
-}
+const GEOMETRY: Record<ChartType, Geometry> = { donut: DONUT_GEOMETRY, pie: PIE_GEOMETRY };
 
 export function generateChartData(
-  data:      Language[],
-  theme:     Theme,
+  data: Language[],
+  theme: Theme,
   chartType: ChartType,
-  gapType:   GapType,
-  stroke:    boolean
+  gapType: GapType,
+  stroke: boolean
 ): ChartResult {
-  const generator = CHART_GENERATORS[chartType] || CHART_GENERATORS.donut;
-  return generator(data, theme, gapType, stroke);
+  const geometry = GEOMETRY[chartType] ?? GEOMETRY.donut;
+
+  const {
+    chartX,
+    legendStartX,
+    columnWidth,
+    contentWidth,
+    contentHeight
+  } = computeLayout(data, geometry, gapType);
+
+  const segments = createDonutSegments(
+    data,
+    chartX,
+    geometry,
+    [...theme.colours],
+    stroke,
+    gapType,
+    theme.gap
+  );
+  const legend = createLegend(
+    data,
+    theme,
+    legendStartX,
+    stroke,
+    columnWidth,
+    gapType
+  );
+
+  return { segments, legend, contentWidth, contentHeight };
 }

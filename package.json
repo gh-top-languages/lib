@@ -2,7 +2,7 @@
   "name": "@gh-top-languages/lib",
   "description": "Library for github-top-languages — chart generation, SVG output, and parameter parsing",
   "author": "Mason L'Etoile",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -29,8 +29,6 @@
   "files": ["dist", "src"],
   "exports": {
     "./charts/types.js":       { "types": "./dist/charts/types.d.ts",       "import": "./dist/charts/types.js"       },
-    "./charts/donut.js":       { "types": "./dist/charts/donut.d.ts",       "import": "./dist/charts/donut.js"       },
-    "./charts/pie.js":         { "types": "./dist/charts/pie.d.ts",         "import": "./dist/charts/pie.js"         },
     "./charts/geometry.js":    { "types": "./dist/charts/geometry.d.ts",    "import": "./dist/charts/geometry.js"    },
     "./charts/legend.js":      { "types": "./dist/charts/legend.d.ts",      "import": "./dist/charts/legend.js"      },
     "./charts/layout.js":      { "types": "./dist/charts/layout.d.ts",      "import": "./dist/charts/layout.js"      },

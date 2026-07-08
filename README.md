@@ -19,9 +19,7 @@ Core library for github-top-languages projects — chart generation, SVG output,
 | `charts/geometry.js`    | SVG arc path math and segment helpers     |
 | `charts/legend.js`      | Legend element generation                 |
 | `charts/layout.js`      | Shared layout calculations                |
-| `charts/generate.js`    | Chart type dispatcher                     |
-| `charts/donut.js`       | Donut chart segment and legend generation |
-| `charts/pie.js`         | Pie chart segment and legend generation   |
+| `charts/generate.js`    | Chart geometry dispatch, segment and legend generation |
 | `render/svg.js`         | SVG document rendering                    |
 | `render/error.js`       | Error SVG rendering                       |
 
