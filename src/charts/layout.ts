@@ -6,7 +6,7 @@ import {
   LEGEND_SHIFT_THRESHOLD
 } from "../constants/styles.js";
 import type { GapType, Geometry, Language } from "./types.js";
-import { formatLegendEntry                } from "./format.js";
+import { formatLegendEntry                } from "./helpers.js";
 
 const measureText = (text: string, fontSize: number): number => [...text]
   .reduce((sum, ch) => sum + (ARIAL_CHAR_WIDTHS[ch] ?? DEFAULT_CHAR_WIDTH), 0) * fontSize / 1000;

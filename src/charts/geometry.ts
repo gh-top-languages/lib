@@ -1,5 +1,6 @@
 import { FULL_CIRCLE_ANGLE                       } from "../constants/geometry.js";
 import type { Point, Language, Geometry, GapType } from "./types.js"
+import { resolveColour                           } from "./helpers.js";
 
 export const polarToCartesian = (
   cx:       number,
@@ -83,11 +84,11 @@ export const createDonutSegments = (
     );
 
     currentAngle += angle;
-    const fillColour = colours[i % colours.length];
+    const fill = resolveColour(colours, i);
     const strokeAttr = stroke
       ? ` stroke="#000" stroke-width="0.5" stroke-linejoin="round"`
-      : ` stroke="${fillColour}" stroke-width="0.2"`;
-    return `<path d="${path}" fill="${fillColour}"${strokeAttr} shape-rendering="geometricPrecision"/>`;
+      : ` stroke="${fill}" stroke-width="0.2"`;
+    return `<path d="${path}" fill="${fill}"${strokeAttr} shape-rendering="geometricPrecision"/>`;
   }).join('');
 
   if (gapType === "gap" && totalPct > 0 && totalPct < 100) {

@@ -7,3 +7,7 @@ export function displayPct(pct: number, totalPct: number, gapType: GapType): num
 export function formatLegendEntry(lang: Language, totalPct: number, gapType: GapType): string {
   return `${lang.lang} ${displayPct(lang.pct, totalPct, gapType).toFixed(1)}%`;
 }
+
+export function resolveColour(colours: readonly string[], index: number): string {
+  return colours[index % colours.length]!;
+}
