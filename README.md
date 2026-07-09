@@ -2,8 +2,8 @@
 
 Core library for github-top-languages projects — chart generation, SVG output, and parameter parsing
 
-[![Tests](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml/badge.svg)](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml)
-[![lib](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
+[![CI](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml/badge.svg)](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml)
+[![Library Version](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
 ## Modules
