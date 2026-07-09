@@ -1,5 +1,6 @@
 import { LEGEND_SHIFT_THRESHOLD, LEGEND_STYLES } from "../constants/styles.js";
 import type { Theme, Language, GapType         } from "./types.js";
+import { formatLegendEntry                     } from "./format.js";
 
 export function createLegend(
   languages:     Language[],
@@ -11,7 +12,6 @@ export function createLegend(
 ): string {
   const numLangs = languages.length;
   const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
-  const displayPct = (pct: number) => gapType === "adapt" && totalPct > 0 ? pct * (100 / totalPct) : pct;
 
   return languages.map((lang, i) => {
     let x: number, y: number;
@@ -49,7 +49,7 @@ export function createLegend(
         font-size="${LEGEND_STYLES.FONT_SIZE}"
         font-family="Arial"
       >
-      ${lang.lang} ${displayPct(lang.pct).toFixed(1)}%
+      ${formatLegendEntry(lang, totalPct, gapType)}
     </text>
     `;
   }).join('');

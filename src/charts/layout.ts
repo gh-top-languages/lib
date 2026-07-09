@@ -6,6 +6,7 @@ import {
   LEGEND_SHIFT_THRESHOLD
 } from "../constants/styles.js";
 import type { GapType, Geometry, Language } from "./types.js";
+import { formatLegendEntry                } from "./format.js";
 
 const measureText = (text: string, fontSize: number): number => [...text]
   .reduce((sum, ch) => sum + (ARIAL_CHAR_WIDTHS[ch] ?? DEFAULT_CHAR_WIDTH), 0) * fontSize / 1000;
@@ -15,8 +16,7 @@ const estimateEntryWidth = (label: string): number =>
 
 export function measureLegend(languages: Language[], isShifted: boolean, gapType: GapType) {
   const totalPct = languages.reduce((sum, l) => sum + l.pct, 0);
-  const displayPct = (pct: number) => gapType === "adapt" && totalPct > 0 ? pct * (100 / totalPct) : pct;
-  const entryWidth = (lang: Language) => estimateEntryWidth(`${lang.lang} ${displayPct(lang.pct).toFixed(1)}%`);
+  const entryWidth = (lang: Language) => estimateEntryWidth(formatLegendEntry(lang, totalPct, gapType));
 
   if (!isShifted) {
     const width = languages.reduce((max, l) => Math.max(max, entryWidth(l)), 0);
