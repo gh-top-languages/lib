@@ -19,6 +19,7 @@ Core library for gh-top-languages — chart generation, SVG output, and paramete
 | `utils/params.js`       | Query parameter parsing and normalization |
 | `utils/sanitize.js`     | HTML entity sanitization                  |
 | `charts/geometry.js`    | SVG arc path math and segment helpers     |
+| `charts/helpers.js`     | Percent display and colour-resolution helpers |
 | `charts/legend.js`      | Legend element generation                 |
 | `charts/layout.js`      | Shared layout calculations                |
 | `charts/generate.js`    | Chart geometry dispatch, segment and legend generation |
