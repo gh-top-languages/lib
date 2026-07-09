@@ -19,6 +19,7 @@
     "url": "git+https://github.com/gh-top-languages/lib.git"
   },
   "type": "module",
+  "engines": { "node": ">=22" },
   "exports": {
     "./charts/types.js":       { "types": "./dist/charts/types.d.ts",       "import": "./dist/charts/types.js"       },
     "./charts/geometry.js":    { "types": "./dist/charts/geometry.d.ts",    "import": "./dist/charts/geometry.js"    },
