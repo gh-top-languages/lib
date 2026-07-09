@@ -7,5 +7,3 @@ export const DEFAULT_CONFIG = {
   COUNT:      8,
   MAX_COUNT:  16
 } as const;
-
-export const REFRESH_INTERVAL = 1000 * 60 * 60;

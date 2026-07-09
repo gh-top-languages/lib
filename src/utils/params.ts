@@ -13,8 +13,6 @@ export interface ParsedParams {
   selectedTheme: Theme;
   gapType:       GapType;
   stroke:        boolean;
-  useTestData:   boolean;
-  errorTest:     string;
 }
 
 export type QueryParams = Record<string, string | undefined>;
@@ -76,7 +74,5 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
     },
     gapType:     (["gap", "grow", "adapt"] as const).includes(query["gap_type"] as GapType) ? query["gap_type"] as GapType : "gap",
     stroke:      query["stroke"] === "true",
-    useTestData: query["test"] === "true",
-    errorTest:   sanitize(query["error"] ?? '')
   }
 }
