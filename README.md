@@ -39,8 +39,6 @@ All parsing lives in `parseQueryParams`(utils/params.js), invalid params fall ba
 | title          | Top Languages | HTML-escaped                              |
 | hide_title     | false         | If `true` title is not rendered           |
 | width / height | 400 / 300     | Integers, minimums: width 400, height 265 |
-| test           | false         | Disable/enable requesting test data       |
-| error          | ''            | Test hook: sanitized message for testing the error card. |
 
 ## Gap modes
 When the supplied languages sum to less than 100%, `gap_type` controls what fills the ring and what the legend prints:

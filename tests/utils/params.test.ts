@@ -17,7 +17,6 @@ describe("parseQueryParams", () => {
 
     expect(params.width).toBeGreaterThanOrEqual(DEFAULT_CONFIG.MIN_WIDTH);
     expect(params.height).toBe(DEFAULT_CONFIG.HEIGHT);
-    expect(params.useTestData).toBe(false);
   });
 
   it("accepts valid chart type", () => {
@@ -96,11 +95,6 @@ describe("parseQueryParams", () => {
     expect(params.count).toBe(DEFAULT_CONFIG.COUNT);
     expect(params.width).toBe(DEFAULT_CONFIG.WIDTH);
   })
-
-  it("enables test mode when test=true", () => {
-    expect(parseQueryParams({ test: "true" }).useTestData).toBe(true);
-    expect(parseQueryParams({ test: "false" }).useTestData).toBe(false);
-  });
 
   it("falls back to theme colour when c1..cN is invalid hex", () => {
     const params = parseQueryParams({ c1: "not-a-colour", c2: "javascript:alert(1)" });
