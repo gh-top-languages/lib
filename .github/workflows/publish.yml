@@ -3,38 +3,13 @@ name: Publish
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 jobs:
   test:
-    uses: ./.github/workflows/test.yml
+    uses: gh-top-languages/.github/.github/workflows/test.yml@v1.0.0
 
   publish:
     needs: test
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-          registry-url: https://registry.npmjs.org
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
+    uses: gh-top-languages/.github/.github/workflows/publish.yml@v1.0.0
+    secrets: inherit

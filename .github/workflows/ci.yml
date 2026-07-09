@@ -2,10 +2,13 @@ name: CI
 
 on:
   push:
-    branches: ['**']
+    branches: [ "main" ]
   pull_request:
-    branches: [main]
+    branches: [ "main" ]
 
 jobs:
   test:
-    uses: ./.github/workflows/test.yml
+    uses: gh-top-languages/.github/.github/workflows/test.yml@v1.0.0
+
+  build:
+    uses: gh-top-languages/.github/.github/workflows/build.yml@v1.0.0
