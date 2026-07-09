@@ -30,7 +30,7 @@ All parsing lives in `parseQueryParams`(utils/params.js), invalid params fall ba
 | Param          | Default       | Behaviour                                 |
 | -----          | -------       | ---------                                 |
 | type           | donut         | `donut` or `pie`                          |
-| count          | 8             | Parsed as integer, clamped to `1`-`16`        |
+| count          | 8             | Parsed as integer, clamped to `1`-`16`    |
 | theme          | default       | `default`, `light`, or `dark`             |
 | bg, text, gap, c1 - c16  | from theme | Accepts a theme name, or a hex value (3-8 digits with or without #) |
 | gap_type       | gap           | `gap`, `grow`, or `adapt`                 |
@@ -47,7 +47,7 @@ When the supplied languages sum to less than 100%, `gap_type` controls what fill
 | ---- | ---- | --------- |
 | gap  | True-size slices, remainder drawn as the gap colour | Raw values, sum to 100 if all values are rendered |
 | grow | Slice angles scaled to fill the circle              | Raw values, sum to 100 if all values are rendered |
-| adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100
+| adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100 |
 
 ## Installation
 ```bash
