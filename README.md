@@ -35,7 +35,7 @@ All parsing lives in `parseQueryParams`(utils/params.js), invalid params fall ba
 | bg, text, gap, c1 - c16  | from theme | Accepts a theme name, or a hex value (3-8 digits with or without #) |
 | gap_type       | gap           | `gap`, `grow`, or `adapt`                 |
 | stroke         | false         | Adds a black outline to slices and legend squares. |
-| title          | Top Languages | HTML-esacped                              |
+| title          | Top Languages | HTML-escaped                              |
 | hide_title     | false         | If `true` title is not rendered           |
 | width / height | 400 / 300     | Integers, minimums: width 400, height 265 |
 | test           | false         | Disable/enable requesting test data       |
