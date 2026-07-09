@@ -11,5 +11,7 @@ jobs:
 
   publish:
     needs: test
+    permissions:
+      contents: write
     uses: gh-top-languages/.github/.github/workflows/publish.yml@v1.0.0
     secrets: inherit
