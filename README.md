@@ -1,9 +1,11 @@
 # GitHub Top Languages Library
 
-Core library for github-top-languages projects — chart generation, SVG output, and parameter parsing
+Core library for gh-top-languages — chart generation, SVG output, and parameter parsing
 
+[![CI](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml/badge.svg)](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml)
+[![Library Version](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
+![Node](https://img.shields.io/badge/Node.js-20+-green)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
-[![lib](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
 
 ## Modules
 | Path                    | Description                               |
@@ -29,12 +31,12 @@ All parsing lives in `parseQueryParams`(utils/params.js), invalid params fall ba
 | Param          | Default       | Behaviour                                 |
 | -----          | -------       | ---------                                 |
 | type           | donut         | `donut` or `pie`                          |
-| count          | 8             | Parsed as integer, clamped to `1`-`16`        |
+| count          | 8             | Parsed as integer, clamped to `1`-`16`    |
 | theme          | default       | `default`, `light`, or `dark`             |
 | bg, text, gap, c1 - c16  | from theme | Accepts a theme name, or a hex value (3-8 digits with or without #) |
 | gap_type       | gap           | `gap`, `grow`, or `adapt`                 |
 | stroke         | false         | Adds a black outline to slices and legend squares. |
-| title          | Top Languages | HTML-esacped                              |
+| title          | Top Languages | HTML-escaped                              |
 | hide_title     | false         | If `true` title is not rendered           |
 | width / height | 400 / 300     | Integers, minimums: width 400, height 265 |
 | test           | false         | Disable/enable requesting test data       |
@@ -46,9 +48,13 @@ When the supplied languages sum to less than 100%, `gap_type` controls what fill
 | ---- | ---- | --------- |
 | gap  | True-size slices, remainder drawn as the gap colour | Raw values, sum to 100 if all values are rendered |
 | grow | Slice angles scaled to fill the circle              | Raw values, sum to 100 if all values are rendered |
-| adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100
+| adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100 |
 
 ## Installation
+### Prerequisites
+- Node.js 20+
+
+### Install Library
 ```bash
 npm install @gh-top-languages/lib
 ```
