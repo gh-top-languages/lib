@@ -49,6 +49,12 @@ When the supplied languages sum to less than 100%, `gap_type` controls what fill
 | grow | Slice angles scaled to fill the circle              | Raw values, sum to 100 if all values are rendered |
 | adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100 |
 
+## API
+Easily deploy your own with [@gh-top-languages/api](https://github.com/gh-top-languages/api): a deployable SVG endpoint for READMEs and websites.
+
+## Builder
+Easily customize your charts with [@gh-top-languages/builder](https://github.com/gh-top-languages/builder): an interactive preview and configurator.
+
 ## Installation
 ### Prerequisites
 - Node.js 22+
