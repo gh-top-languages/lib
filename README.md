@@ -50,6 +50,10 @@ When the supplied languages sum to less than 100%, `gap_type` controls what fill
 | adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100 |
 
 ## Installation
+### Prerequisites
+- Node.js 20+
+
+### Install Library
 ```bash
 npm install @gh-top-languages/lib
 ```
