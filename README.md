@@ -19,6 +19,7 @@ Core library for gh-top-languages — chart generation, SVG output, and paramete
 | `utils/params.js`       | Query parameter parsing and normalization |
 | `utils/sanitize.js`     | HTML entity sanitization                  |
 | `charts/geometry.js`    | SVG arc path math and segment helpers     |
+| `charts/helpers.js`     | Percent display and colour-resolution helpers |
 | `charts/legend.js`      | Legend element generation                 |
 | `charts/layout.js`      | Shared layout calculations                |
 | `charts/generate.js`    | Chart geometry dispatch, segment and legend generation |
@@ -47,6 +48,12 @@ When the supplied languages sum to less than 100%, `gap_type` controls what fill
 | gap  | True-size slices, remainder drawn as the gap colour | Raw values, sum to 100 if all values are rendered |
 | grow | Slice angles scaled to fill the circle              | Raw values, sum to 100 if all values are rendered |
 | adapt | Slice angles scaled to fill the circle             | Rescaled to sum to 100 |
+
+## API
+Easily deploy your own with [@gh-top-languages/api](https://github.com/gh-top-languages/api): a deployable SVG endpoint for READMEs and websites.
+
+## Builder
+Easily customize your charts with [@gh-top-languages/builder](https://github.com/gh-top-languages/builder): an interactive preview and configurator.
 
 ## Installation
 ### Prerequisites
