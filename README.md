@@ -2,8 +2,8 @@
 
 Core library for github-top-languages projects — chart generation, SVG output, and parameter parsing
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 [![lib](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
 ## Modules
 | Path                    | Description                               |
