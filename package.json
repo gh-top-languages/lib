@@ -1,32 +1,25 @@
 {
   "name": "@gh-top-languages/lib",
-  "description": "Library for github-top-languages — chart generation, SVG output, and parameter parsing",
-  "author": "Mason L'Etoile",
   "version": "1.1.2",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gh-top-languages/lib.git"
-  },
+  "description": "Library for github-top-languages — chart generation, SVG output, and parameter parsing",
+  "keywords": [
+    "svg",
+    "charts",
+    "github-profile",
+    "github-top-languages"
+  ],
   "homepage": "https://github.com/gh-top-languages/lib#readme",
   "bugs": {
     "url": "https://github.com/gh-top-languages/lib/issues"
   },
-  "keywords": ["svg", "charts", "github-profile", "github-top-languages"],
+  "license": "MIT",
+  "author": "Mason L'Etoile",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gh-top-languages/lib.git"
+  },
   "type": "module",
-  "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest --coverage",
-    "typecheck": "tsc --noEmit -p tsconfig.test.json",
-    "build": "tsc -p tsconfig.build.json",
-    "prepare": "tsc -p tsconfig.build.json"
-  },
-  "devDependencies": {
-    "typescript": "~6.0.2",
-    "vitest": "^4.0.17",
-    "@vitest/coverage-v8": "^4.0.17"
-  },
-  "files": ["dist", "src"],
+  "engines": { "node": ">=22" },
   "exports": {
     "./charts/types.js":       { "types": "./dist/charts/types.d.ts",       "import": "./dist/charts/types.js"       },
     "./charts/geometry.js":    { "types": "./dist/charts/geometry.d.ts",    "import": "./dist/charts/geometry.js"    },
@@ -42,5 +35,21 @@
     "./constants/styles.js":   { "types": "./dist/constants/styles.d.ts",   "import": "./dist/constants/styles.js"   },
     "./constants/themes.js":   { "types": "./dist/constants/themes.d.ts",   "import": "./dist/constants/themes.js"   },
     "./constants/types.js":    { "types": "./dist/constants/types.d.ts",    "import": "./dist/constants/types.js"    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.17"
   }
 }
