@@ -4,6 +4,7 @@ Core library for gh-top-languages — chart generation, SVG output, and paramete
 
 [![CI](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml/badge.svg)](https://github.com/gh-top-languages/lib/actions/workflows/ci.yml)
 [![Library Version](https://img.shields.io/npm/v/@gh-top-languages/lib)](https://www.npmjs.com/package/@gh-top-languages/lib)
+![Node](https://img.shields.io/badge/Node.js-20+-green)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
 ## Modules
