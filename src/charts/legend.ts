@@ -1,6 +1,6 @@
 import { LEGEND_SHIFT_THRESHOLD, LEGEND_STYLES } from "../constants/styles.js";
 import type { Theme, Language, GapType         } from "./types.js";
-import { formatLegendEntry                     } from "./format.js";
+import { formatLegendEntry, resolveColour      } from "./helpers.js";
 
 export function createLegend(
   languages:     Language[],
@@ -28,7 +28,7 @@ export function createLegend(
       y = LEGEND_STYLES.START_Y + row * LEGEND_STYLES.ROW_HEIGHT;
     }
 
-    const fill = selectedTheme.colours[i];
+    const fill = resolveColour(selectedTheme.colours, i);
     const strokeAttr = stroke
       ? ` stroke="#000" stroke-width="0.5" stroke-linejoin="round"`
       : ``;
