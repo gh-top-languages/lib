@@ -7,24 +7,31 @@ Core library for gh-top-languages — chart generation, SVG output, and paramete
 ![Node](https://img.shields.io/badge/Node.js-22+-green)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
-## Modules
+## Module APIs
+### Public
+Importable via `@gh-top-languages/lib/<path>`:
 | Path                    | Description                               |
 | ---                     | ---                                       |
-| `constants/config.js`   | Default configuration values              |
-| `constants/geometry.js` | Geometry constants                        |
-| `constants/styles.js`   | Style and layout constants                |
-| `constants/themes.js`   | Built-in colour themes                    |
-| `constants/types.js`    | Valid chart type values                   |
 | `charts/types.js`       | Shared types                              |
+| `charts/generate.js`    | Chart geometry dispatch, segment and legend generation |
+| `render/svg.js`         | SVG document rendering                    |
+| `render/error.js`       | Error SVG rendering                       |
 | `utils/params.js`       | Query parameter parsing and normalization |
 | `utils/sanitize.js`     | HTML entity sanitization                  |
+| `constants/config.js`   | Default configuration values              |
+| `constants/themes.js`   | Built-in colour themes                    |
+
+### Internal
+Shipped in the package but not part of the public API:
+| Path                    | Description                               |
+| ---                     | ---                                       |
+| `constants/geometry.js` | Geometry constants                        |
+| `constants/styles.js`   | Style and layout constants                |
+| `constants/types.js`    | Valid chart type values                   |
 | `charts/geometry.js`    | SVG arc path math and segment helpers     |
 | `charts/helpers.js`     | Percent display and colour-resolution helpers |
 | `charts/legend.js`      | Legend element generation                 |
 | `charts/layout.js`      | Shared layout calculations                |
-| `charts/generate.js`    | Chart geometry dispatch, segment and legend generation |
-| `render/svg.js`         | SVG document rendering                    |
-| `render/error.js`       | Error SVG rendering                       |
 
 ## Query parameters
 All parsing lives in `parseQueryParams`(utils/params.js), invalid params fall back to defaults.
