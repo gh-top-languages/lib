@@ -30,7 +30,7 @@ const parseHex = (val: string | undefined, fallback: string): string => {
   return /^#[0-9a-f]{3,8}$/i.test(hex) ? hex : fallback;
 };
 
-const resolveColour = (
+const resolveThemeColour = (
   query: QueryParams,
   theme: Theme,
   key:   "bg" | "text" | "gap"
@@ -66,9 +66,9 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
     height:      Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
     count:       Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
     selectedTheme: {
-      bg:      resolveColour(query, baseTheme, "bg"),
-      text:    resolveColour(query, baseTheme, "text"),
-      gap:     resolveColour(query, baseTheme, "gap"),
+      bg:      resolveThemeColour(query, baseTheme, "bg"),
+      text:    resolveThemeColour(query, baseTheme, "text"),
+      gap:     resolveThemeColour(query, baseTheme, "gap"),
       colours,
     },
     gapType:     (["gap", "grow", "adapt"] as const).includes(query["gap_type"] as GapType) ? query["gap_type"] as GapType : "gap",
