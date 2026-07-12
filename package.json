@@ -1,6 +1,6 @@
 {
   "name": "@gh-top-languages/lib",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Library for gh-top-languages — chart generation, SVG output, and parameter parsing",
   "keywords": [
     "svg",
@@ -22,19 +22,13 @@
   "engines": { "node": ">=22" },
   "exports": {
     "./charts/types.js":       { "types": "./dist/charts/types.d.ts",       "import": "./dist/charts/types.js"       },
-    "./charts/geometry.js":    { "types": "./dist/charts/geometry.d.ts",    "import": "./dist/charts/geometry.js"    },
-    "./charts/legend.js":      { "types": "./dist/charts/legend.d.ts",      "import": "./dist/charts/legend.js"      },
-    "./charts/layout.js":      { "types": "./dist/charts/layout.d.ts",      "import": "./dist/charts/layout.js"      },
     "./charts/generate.js":    { "types": "./dist/charts/generate.d.ts",    "import": "./dist/charts/generate.js"    },
     "./render/svg.js":         { "types": "./dist/render/svg.d.ts",         "import": "./dist/render/svg.js"         },
     "./render/error.js":       { "types": "./dist/render/error.d.ts",       "import": "./dist/render/error.js"       },
     "./utils/params.js":       { "types": "./dist/utils/params.d.ts",       "import": "./dist/utils/params.js"       },
     "./utils/sanitize.js":     { "types": "./dist/utils/sanitize.d.ts",     "import": "./dist/utils/sanitize.js"     },
     "./constants/config.js":   { "types": "./dist/constants/config.d.ts",   "import": "./dist/constants/config.js"   },
-    "./constants/geometry.js": { "types": "./dist/constants/geometry.d.ts", "import": "./dist/constants/geometry.js" },
-    "./constants/styles.js":   { "types": "./dist/constants/styles.d.ts",   "import": "./dist/constants/styles.js"   },
-    "./constants/themes.js":   { "types": "./dist/constants/themes.d.ts",   "import": "./dist/constants/themes.js"   },
-    "./constants/types.js":    { "types": "./dist/constants/types.d.ts",    "import": "./dist/constants/types.js"    }
+    "./constants/themes.js":   { "types": "./dist/constants/themes.d.ts",   "import": "./dist/constants/themes.js"   }
   },
   "files": [
     "dist",
