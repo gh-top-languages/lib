@@ -1,5 +1,6 @@
 import { TITLE_STYLES     } from "../constants/styles.js";
 import type { ChartResult } from "../charts/types.js";
+import { sanitize         } from "../utils/sanitize.js";
 
 export function renderSvg(
   width: number, height: number, background: string,
@@ -12,7 +13,7 @@ export function renderSvg(
       text-anchor="middle" fill="${textColour}"
       font-family="Arial" font-size="${TITLE_STYLES.FONT_SIZE}"
     >
-      ${title}
+      ${sanitize(title)}
     </text>
   ` : '';
 

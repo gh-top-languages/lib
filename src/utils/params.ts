@@ -2,7 +2,6 @@ import { VALID_TYPES                    } from "../constants/types.js";
 import { DEFAULT_CONFIG                 } from "../constants/config.js";
 import { THEMES                         } from "../constants/themes.js";
 import type { ChartType, GapType, Theme } from "../charts/types.js";
-import { sanitize                       } from "./sanitize.js";
 
 export interface ParsedParams {
   chartType:     ChartType;
@@ -62,7 +61,7 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
 
   return {
     chartType,
-    chartTitle:  query["hide_title"] === "true" ? '' : sanitize(query["title"] ?? DEFAULT_CONFIG.TITLE),
+    chartTitle:  query["hide_title"] === "true" ? '' : query["title"] ?? DEFAULT_CONFIG.TITLE,
     width:       Math.max(parseIntSafe(query["width"],  DEFAULT_CONFIG.WIDTH),  DEFAULT_CONFIG.MIN_WIDTH ),
     height:      Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
     count:       Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
