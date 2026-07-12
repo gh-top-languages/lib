@@ -1,6 +1,6 @@
 {
   "name": "@gh-top-languages/lib",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Library for gh-top-languages — chart generation, SVG output, and parameter parsing",
   "keywords": [
     "svg",

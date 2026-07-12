@@ -77,6 +77,17 @@ describe("donut geometry", () => {
     expect(paths).toMatch(/fill="#333"/);
   });
 
+  it("gapType 'gap': stroke outlines the gap's two radial edges", () => {
+    const langs: Language[] = [{ lang: "JS", pct: 50 }];
+
+    const stroked = createDonutSegments(langs, 100, mockGeometry, ["#f00"], true, "gap", "#333");
+    expect(stroked.match(/stroke="#000"/g)?.length).toBe(3);
+
+    const bare = createDonutSegments(langs, 100, mockGeometry, ["#f00"], false, "gap", "#333");
+    expect(bare).not.toMatch(/stroke="#000"/);
+    expect(bare).toMatch(/fill="#333"/);
+  });
+
   it("gapType 'grow': rescales arcs to fill the circle, no gap segment", () => {
     const langs: Language[] = [{ lang: "JS", pct: 50 }];
     const paths = createDonutSegments(langs, 100, mockGeometry, ["#f00"], false, "grow", "#333");
