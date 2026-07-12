@@ -28,4 +28,10 @@ describe("renderSvg", () => {
     expect(result).toContain(chart.segments);
     expect(result).toContain(chart.legend);
   });
+
+  it("escapes markup in the title", () => {
+    const result = renderSvg(600, 400, "#ffffff", chart, `<script>alert("x")</script>`, "#000000");
+    expect(result).toContain("&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;");
+    expect(result).not.toContain("<script>");
+  });
 });

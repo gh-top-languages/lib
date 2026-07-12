@@ -43,6 +43,13 @@ describe("createLegend", () => {
     expect(result).toContain(`stroke-width="0.5"`);
   });
 
+  it("escapes markup in language names", () => {
+    const langs = [{ lang: `<img src=x onerror=alert(1)>`, pct: 100 }];
+    const result = createLegend(langs, theme, 300, false, 110, "gap");
+    expect(result).toContain("&lt;img src=x onerror=alert(1)&gt; 100.0%");
+    expect(result).not.toContain("<img");
+  });
+
   it("generates rect and text for each language", () => {
     const langs = [
       { lang: "C#", pct: 50 },
