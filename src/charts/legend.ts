@@ -1,6 +1,7 @@
 import { LEGEND_SHIFT_THRESHOLD, LEGEND_STYLES } from "../constants/styles.js";
 import type { Theme, Language, GapType         } from "./types.js";
 import { formatLegendEntry, resolveColour      } from "./helpers.js";
+import { sanitize                              } from "../utils/sanitize.js";
 
 export function createLegend(
   languages:     Language[],
@@ -49,7 +50,7 @@ export function createLegend(
         font-size="${LEGEND_STYLES.FONT_SIZE}"
         font-family="Arial"
       >
-      ${formatLegendEntry(lang, totalPct, gapType)}
+      ${sanitize(formatLegendEntry(lang, totalPct, gapType))}
     </text>
     `;
   }).join('');
