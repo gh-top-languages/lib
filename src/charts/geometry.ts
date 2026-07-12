@@ -92,8 +92,19 @@ export const createDonutSegments = (
   }).join('');
 
   if (gapType === "gap" && totalPct > 0 && totalPct < 100) {
-    const gapPath = describeSegment(cx, geometry.CENTER_Y, geometry.INNER_RADIUS, geometry.OUTER_RADIUS, currentAngle, FULL_CIRCLE_ANGLE - 0.1);
+    const gapStart = currentAngle;
+    const gapEnd = FULL_CIRCLE_ANGLE - 0.1;
+    const gapPath = describeSegment(cx, geometry.CENTER_Y, geometry.INNER_RADIUS, geometry.OUTER_RADIUS, gapStart, gapEnd);
     segments += `<path d="${gapPath}" fill="${gapColour}" shape-rendering="geometricPrecision"/>`;
+
+    if (stroke) {
+      const edge = (angle: number) => {
+        const inner = polarToCartesian(cx, geometry.CENTER_Y, geometry.INNER_RADIUS, angle);
+        const outer = polarToCartesian(cx, geometry.CENTER_Y, geometry.OUTER_RADIUS, angle);
+        return `<path d="M ${inner.x} ${inner.y} L ${outer.x} ${outer.y}" stroke="#000" stroke-width="0.5" stroke-linecap="round" fill="none" shape-rendering="geometricPrecision"/>`;
+      };
+      segments += edge(gapStart) + edge(gapEnd);
+    }
   }
 
   return segments;
