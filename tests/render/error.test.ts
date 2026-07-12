@@ -27,4 +27,10 @@ describe("renderError", () => {
     expect(result).toContain("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...");
     expect(result).not.toContain("A".repeat(50));
   });
+
+  it("escapes markup in the message", () => {
+    const result = renderError(`<script>"x"</script>`, 400, 300);
+    expect(result).toContain("&lt;script&gt;&quot;x&quot;&lt;/script&gt;");
+    expect(result).not.toContain("<script>");
+  });
 });
