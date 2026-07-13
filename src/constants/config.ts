@@ -7,3 +7,9 @@ export const DEFAULT_CONFIG = {
   COUNT:      8,
   MAX_COUNT:  16
 } as const;
+
+export const PARAM_DEFAULTS = {
+  THEME:    "default",
+  TYPE:     "donut",
+  GAP_TYPE: "gap",
+} as const;
