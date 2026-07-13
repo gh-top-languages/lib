@@ -7,11 +7,11 @@ on:
 
 jobs:
   test:
-    uses: gh-top-languages/.github/.github/workflows/test.yml@v1.0.0
+    uses: gh-top-languages/.github/.github/workflows/test.yml@v1.1.0
 
   publish:
     needs: test
     permissions:
       contents: write
-    uses: gh-top-languages/.github/.github/workflows/publish.yml@v1.0.0
+    uses: gh-top-languages/.github/.github/workflows/publish.yml@v1.1.0
     secrets: inherit
