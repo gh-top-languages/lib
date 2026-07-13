@@ -1,5 +1,5 @@
 import { VALID_TYPES                    } from "../constants/types.js";
-import { DEFAULT_CONFIG                 } from "../constants/config.js";
+import { DEFAULT_CONFIG, PARAM_DEFAULTS } from "../constants/config.js";
 import { THEMES                         } from "../constants/themes.js";
 import type { ChartType, GapType, Theme } from "../charts/types.js";
 
@@ -42,7 +42,7 @@ const resolveThemeColour = (
 };
 
 export function parseQueryParams(query: QueryParams): ParsedParams {
-  const baseTheme = THEMES[query["theme"] as keyof typeof THEMES] ?? THEMES.default;
+  const baseTheme = THEMES[query["theme"] as keyof typeof THEMES] ?? THEMES[PARAM_DEFAULTS.THEME];
   const count     = parseIntSafe(query["count"], DEFAULT_CONFIG.COUNT);
 
   const colours: string[] = [...baseTheme.colours];
@@ -57,21 +57,22 @@ export function parseQueryParams(query: QueryParams): ParsedParams {
   }
 
   const typeParam = query["type"] as ChartType | undefined;
-  const chartType: ChartType = VALID_TYPES.some(t => t === typeParam) ? typeParam! : "donut";
+  const chartType: ChartType = VALID_TYPES.some(t => t === typeParam) ? typeParam! : PARAM_DEFAULTS.TYPE;
 
   return {
     chartType,
-    chartTitle:  query["hide_title"] === "true" ? '' : query["title"] ?? DEFAULT_CONFIG.TITLE,
-    width:       Math.max(parseIntSafe(query["width"],  DEFAULT_CONFIG.WIDTH),  DEFAULT_CONFIG.MIN_WIDTH ),
-    height:      Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
-    count:       Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
+    chartTitle: query["hide_title"] === "true" ? '' : query["title"] ?? DEFAULT_CONFIG.TITLE,
+    width:      Math.max(parseIntSafe(query["width"],  DEFAULT_CONFIG.WIDTH),  DEFAULT_CONFIG.MIN_WIDTH ),
+    height:     Math.max(parseIntSafe(query["height"], DEFAULT_CONFIG.HEIGHT), DEFAULT_CONFIG.MIN_HEIGHT),
+    count:      Math.min(Math.max(count, 1), DEFAULT_CONFIG.MAX_COUNT),
     selectedTheme: {
-      bg:      resolveThemeColour(query, baseTheme, "bg"),
-      text:    resolveThemeColour(query, baseTheme, "text"),
-      gap:     resolveThemeColour(query, baseTheme, "gap"),
+      bg:       resolveThemeColour(query, baseTheme, "bg"),
+      text:     resolveThemeColour(query, baseTheme, "text"),
+      gap:      resolveThemeColour(query, baseTheme, "gap"),
       colours,
     },
-    gapType:     (["gap", "grow", "adapt"] as const).includes(query["gap_type"] as GapType) ? query["gap_type"] as GapType : "gap",
-    stroke:      query["stroke"] === "true",
+    gapType:    (["gap", "grow", "adapt"] as const).includes(query["gap_type"] as GapType)
+                  ? query["gap_type"] as GapType : PARAM_DEFAULTS.GAP_TYPE,
+    stroke:     query["stroke"] === "true",
   }
 }
