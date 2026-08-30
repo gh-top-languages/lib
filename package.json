@@ -42,7 +42,7 @@
     "prepare": "tsc -p tsconfig.build.json"
   },
   "devDependencies": {
-    "typescript": "~6.0.2",
+    "typescript": "~7.0.2",
     "vitest": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17"
   }
